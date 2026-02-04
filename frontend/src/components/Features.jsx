@@ -209,7 +209,10 @@ const StyledWrapper = styled.div`
     /* Removed width change to keep grid stable */
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     transform: translateY(-5px); 
-    background: white; 
+    /* Glass effect on hover with color tint */
+    background: linear-gradient(135deg, ${props => props.$color}22, rgba(255, 255, 255, 0.9));
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
   }
 
   .card:hover::before {
