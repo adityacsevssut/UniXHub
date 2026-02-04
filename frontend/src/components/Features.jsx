@@ -1,51 +1,74 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ShieldCheck, Lock, Zap, MessageSquare, Users, Award, Check } from 'lucide-react';
+import { ShieldCheck, ChevronRight,Lock, Zap, MessageSquare, Users, Award, Check } from 'lucide-react';
 import './Features.css';
 
 const featuresData = [
   {
-    title: 'Verified Talent',
+    title: 'Projects Ready',
+    icon: <Award size={32} />,
+    description: 'Access real-world, ready-to-use projects to launch faster and learn practically.',
+    points: ['Real-world project experience', 'Ready-to-use solutions', 'Faster learning & launch'],
+    color: '#06b6d4' // Cyan
+  },
+  {
+    title: 'Expert Creators',
     icon: <ShieldCheck size={32} />,
-    description: 'We ensure authenticity and quality by rigorously vetting every student freelancer joined.',
-    points: ['Skill verification tests', 'Comprehensive portfolio reviews', 'University identity confirmation'],
+    description: 'We deliver high-quality design and development with skilled professionals.',
+    points: ['Experienced designers & developers', 'Quality-checked projects', 'Modern tools & technologies'],
     color: '#3b82f6' // Blue
   },
   {
-    title: 'Secure Payments',
-    icon: <Lock size={32} />,
-    description: 'Your money is safe with us. We use an escrow system to protect both parties.',
-    points: ['Milestone-based fund release', 'Multiple secure payment gateways', 'Automated fraud protection'],
-    color: '#10b981' // Green
-  },
-  {
-    title: 'Smart Matching',
+    title: 'Easy Collaboration',
     icon: <Zap size={32} />,
-    description: 'Our AI algorithms connect the right talent with the right projects instantly.',
-    points: ['Skill-based recommendations', 'Budget & timeline matching', 'Instant availability syncing'],
+    description: 'We maintain simple and clear communication during the whole project.',
+    points: ['Direct client communication', 'Regular progress updates', 'Friendly support'],
     color: '#8b5cf6' // Violet
   },
   {
-    title: 'Collaboration Suite',
+    title: 'Client First Approach',
     icon: <MessageSquare size={32} />,
-    description: 'Everything you need to manage projects and communicate effectively in one place.',
-    points: ['Real-time built-in chat', 'Seamless file sharing', 'Project progress dashboard'],
+    description: 'Your satisfaction is our priority, and we deliver the best results for you.',
+    points: ['Affordable pricing', 'Unlimited support guidance', 'Long-term partnership focus'],
     color: '#ec4899' // Pink
   },
   {
-    title: 'Community Hub',
+    title: 'Fast Delivery',
     icon: <Users size={32} />,
-    description: 'Join a thriving community of student developers and innovators.',
-    points: ['Peer-to-peer learning', 'Exclusive mentorship programs', 'Tech events & hackathon alerts'],
+    description: 'We value your time and meet deadlines.',
+    points: ['On-time project delivery', 'Exclusive mentorship programs', 'Smooth workflow'],
     color: '#f59e0b' // Amber
   },
   {
-    title: 'Student First',
-    icon: <Award size={32} />,
-    description: 'A platform designed specifically to boost student careers and portfolios.',
-    points: ['Low/Zero platform fees', 'Free monthly project bids', 'Certified experience badges'],
-    color: '#06b6d4' // Cyan
-  }
+    title: 'Reliable & Secure',
+    icon: <Lock size={32} />,
+    description: 'Your data and payments are always fully protected and secure with us.',
+    points: ['Secure payment methods', 'Client data protection', 'Transparent process'],
+    color: '#10b981' // Green
+  },
 ];
+
+const BulletArrow = ({ size = 16, color }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className="point-icon"
+  >
+    {/* Top half - Lighter/Main Color */}
+    <path
+      d="M2 2L22 12L2 12Z"
+      fill={color}
+    />
+    {/* Bottom half - Darker/Shaded Color - using a filter hack or opacity */}
+    <path
+      d="M2 22L22 12L2 12Z"
+      fill={color}
+      style={{ filter: 'brightness(0.6)' }}
+    />
+  </svg>
+);
 
 const FeatureCard = ({ title, icon, description, points, color, isVisible, index }) => {
   return (
@@ -67,7 +90,7 @@ const FeatureCard = ({ title, icon, description, points, color, isVisible, index
       <ul className="feature-points">
         {points.map((point, i) => (
           <li key={i} className="feature-point">
-            <Check size={16} className="point-icon" style={{ color: color }} />
+            <ChevronRight size={16} className="point-icon" style={{ color: color }} />
             <span>{point}</span>
           </li>
         ))}
@@ -102,7 +125,7 @@ const Features = () => {
       <div className="container">
         <div className="section-header centered-header-text">
           <h2 className="section-title">Why To Choose <span className="text-gradient"> UniXHub</span></h2>
-          <p className="section-subtitle">Powerful features designed to simplify freelancing for students.</p>
+          <p className="section-subtitle">Powerful features designed to simplify Proffesional Journey.</p>
         </div>
 
         <div className="features-grid">

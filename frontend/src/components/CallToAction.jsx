@@ -6,16 +6,12 @@ const CallToAction = () => {
   return (
     <section className="cta-section">
       <div className="container cta-container">
-        <h2 className="cta-title">Ready to Transform Your Future?</h2>
-        <p className="cta-subtitle">
-          Join hundreds of students who have transformed their careers with TalentSync.
-          <br />
-          Start your freelancing journey today and build real-world experience.
-        </p>
+        <h2 className="cta-title">Want To be Work With Us?</h2>
+
 
         <button className="cta-button">
           <MessageCircle size={20} />
-          <span>Talk to Advisor</span>
+          <span>Talk to Us</span>
         </button>
       </div>
     </section>

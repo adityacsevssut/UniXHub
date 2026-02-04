@@ -2,7 +2,28 @@
 .features-section {
   position: relative;
   z-index: 10;
-  /* Optional: Background variation if needed, using global bg for now */
+}
+
+.features-section .section-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+
+.features-section .section-subtitle {
+  font-size: 1.25rem;
+  max-width: 700px;
+}
+
+@media (max-width: 768px) {
+  .features-section .section-title {
+    font-size: 2.25rem;
+  }
+  
+  .features-section .section-subtitle {
+    font-size: 1.1rem;
+  }
 }
 
 .features-grid {
@@ -61,14 +82,14 @@
 }
 
 .feature-title {
-  font-size: 1.5rem;
+  font-size: 1.75rem; /* Increased from 1.5rem */
   font-weight: 700;
   color: var(--text-main);
   margin-bottom: 0.75rem;
 }
 
 .feature-desc {
-  font-size: 0.95rem;
+  font-size: 1.15rem; /* Increased from 0.95rem */
   color: var(--text-muted);
   line-height: 1.6;
   margin-bottom: 1.5rem;
@@ -88,7 +109,7 @@
   display: flex;
   align-items: flex-start;
   gap: 0.75rem;
-  font-size: 0.9rem;
+  font-size: 1.05rem; /* Increased from 0.9rem */
   color: #475569;
   line-height: 1.4;
 }

@@ -3,39 +3,15 @@ import { BookOpen, Trophy, Globe } from 'lucide-react';
 import './About.css';
 
 const About = () => {
-  const handleMouseMove = (e) => {
-    const { currentTarget: target } = e;
-    const rect = target.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    // Spotlight position
-    target.style.setProperty("--mouse-x", `${x}px`);
-    target.style.setProperty("--mouse-y", `${y}px`);
-
-    // 3D Tilt calculation
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    // Rotate X: moves based on Y axis (up/down)
-    // Rotate Y: moves based on X axis (left/right)
-    const rotateX = ((y - centerY) / centerY) * -12; // Max 12 deg
-    const rotateY = ((x - centerX) / centerX) * 12;
-
-    target.style.setProperty("--rotate-x", `${rotateX}deg`);
-    target.style.setProperty("--rotate-y", `${rotateY}deg`);
-  };
-
-  const handleMouseLeave = (e) => {
-    const target = e.currentTarget;
-    target.style.setProperty("--rotate-x", "0deg");
-    target.style.setProperty("--rotate-y", "0deg");
-  };
-
   return (
     <div className="about-wrapper" id="about">
       {/* Header Section */}
       <section className="about-header">
+        <div className="custom-shape-divider-top">
+          <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" className="shape-fill"></path>
+          </svg>
+        </div>
         <div className="about-header-bg">
           <img src="/assets/about-header.png" alt="University Library" />
           <div className="about-header-overlay"></div>
@@ -57,97 +33,65 @@ const About = () => {
               <span className="stat-label">Verified IDs</span>
             </div>
             <div className="stat-box glass-stat">
-              <span className="stat-number text-gradient-purple">Secure</span>
+              <span className="stat-number text-gradient-purple">SECURE</span>
               <span className="stat-label">Environment</span>
             </div>
             <div className="stat-box glass-stat">
-              <span className="stat-number text-gradient-pink">Expert</span>
+              <span className="stat-number text-gradient-pink">EXPERT</span>
               <span className="stat-label">Freelancers</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Content Grid Section */}
-      <section className="about-content-section">
-        <div className="container about-cards-container">
+      {/* Content Sections */}
+      <div className="about-content-rows">
 
-          {/* Mission Card */}
-          <div className="interactive-card" onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
-            <div className="card-border"></div>
-            <div className="card-content-inner">
-              <div className="card-icon-box box-blue">
-                <BookOpen size={28} />
+        {/* Mission Section (Dark Theme) */}
+        <section className="about-row bg-dark-mission">
+          <div className="container row-container">
+            <div className="row-content">
+              <div className="mission-card">
+                <h2 className="row-title">To Whom UniX<span className="highlight-gradient">Hub</span> Helps?</h2>
+                <p className="row-desc">
+                  UniXHub works with students, creators, and businesses to grow their online presence professionally And make Thier Portfolio Stronger.
+                </p>
+                <ul className="row-list">
+                  <li><CheckCircleIcon color="#60a5fa" />Students Managing Tight Academic Deadlines</li>
+                  <li><CheckCircleIcon color="#60a5fa" />Students Who Need Neat And Well Presented Work.</li>
+                  <li><CheckCircleIcon color="#60a5fa" /> Students Looking For A Peer Support They Can Trust.</li>
+                  <li><CheckCircleIcon color="#60a5fa" />Skilled Students Who Wants To Earn Using Thier Abilities.</li>
+                </ul>
               </div>
-              <h3 className="interactive-title">Our Mission</h3>
-              <p className="interactive-desc">
-                Building a Smart Freelancing Ecosystem where students seamlessly balance academics with real-world earnings.
-              </p>
-
-              <div className="interactive-visual">
-                <img src="/assets/mission.png" alt="Mission" />
-                <div className="visual-glow glow-blue"></div>
-              </div>
-
-              <div className="interactive-tags">
-                <span className="tag-pill">Simplify</span>
-                <span className="tag-pill">Track Growth</span>
+            </div>
+            <div className="row-content">
+              <div className="mission-card">
+                <h2 className="row-title">What Exactly UniX<span className="highlight-gradient">Hub</span> Does?</h2>
+                <p className="row-desc">
+                  UniXHub is a creative digital service startup offering Design, Development, and Branding solutions to help businesses and individuals Grow Proffesional.
+                </p>
+                <ul className="row-list">
+                  <li><CheckCircleIcon color="#60a5fa" /> Builds modern websites and full-stack applications</li>
+                  <li><CheckCircleIcon color="#60a5fa" />Creates professional portfolios for students & businesses.</li>
+                  <li><CheckCircleIcon color="#60a5fa" /> Provides ready-to-use, real-world projects and solutions</li>
+                  <li><CheckCircleIcon color="#60a5fa" /> Designs logos, branding, and social media creatives</li>
+                </ul>
               </div>
             </div>
           </div>
+        </section>
 
-          {/* Vision Card */}
-          <div className="interactive-card" onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
-            <div className="card-border"></div>
-            <div className="card-content-inner">
-              <div className="card-icon-box box-pink">
-                <Trophy size={28} />
-              </div>
-              <h3 className="interactive-title">Our Vision</h3>
-              <p className="interactive-desc">
-                A future where every student manages learning, performance, and productivity through one intelligent platform.
-              </p>
-
-              <div className="interactive-visual">
-                <img src="/assets/vision.png" alt="Vision" />
-                <div className="visual-glow glow-pink"></div>
-              </div>
-
-              <div className="interactive-tags">
-                <span className="tag-pill">Global Network</span>
-                <span className="tag-pill">Productivity</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Values Card */}
-          <div className="interactive-card" onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
-            <div className="card-border"></div>
-            <div className="card-content-inner">
-              <div className="card-icon-box box-green">
-                <Globe size={28} />
-              </div>
-              <h3 className="interactive-title">Core Values</h3>
-              <p className="interactive-desc">
-                Guiding principles that define how we build, improve, and deliver for the student community.
-              </p>
-
-              <div className="interactive-visual">
-                <img src="/assets/values.png" alt="Values" />
-                <div className="visual-glow glow-green"></div>
-              </div>
-
-              <div className="interactive-tags">
-                <span className="tag-pill">Innovation</span>
-                <span className="tag-pill">Quality</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
+      </div>
     </div>
   );
 };
+
+// Simple Icon Component for the list
+const CheckCircleIcon = ({ color }) => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" fill={color} fillOpacity="0.2" stroke={color} strokeWidth="1.5" />
+    <path d="M7.75 12.75L10 15.25L16.25 8.75" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
 
 export default About;

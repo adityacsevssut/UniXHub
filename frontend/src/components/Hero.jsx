@@ -15,7 +15,7 @@ const Hero = () => {
         <div className="hero-center-text">
           <h1 className="hero-welcome-title">
             <TypewriterEffect
-              text="Welcome To Our"
+              text="Proffesional Services"
               speed={100}
               hideCursorOnComplete={true}
               onComplete={() => setLine1Done(true)}
@@ -23,12 +23,12 @@ const Hero = () => {
             <br />
             {line1Done && (
               <TypewriterEffect
-                text="Official Freelancing Website"
+                text="Where Ideas Turn Into Reality."
                 speed={100}
                 deleteSpeed={50}
                 loop={true}
                 pauseDuration={2500}
-                className="text-gradient"
+                className="text-gradient hero-subtitle-text"
               />
             )}
           </h1>

@@ -6,45 +6,45 @@ const domains = [
   {
     title: 'Graphic Design',
     icon: <Palette size={28} />,
-    description: 'Logos, branding, social media Posters, and Banners.',
+    description: 'Design Your Logos and Create Branding, Social Media Posts, and Banners for Your Business.',
     tags: ['Branding', 'UI/UX', 'Social Media'],
     color: '#ec4899' // Pink
   },
   {
-    title: 'UI Development',
+    title: 'FrontEnd Development',
     icon: <Layout size={28} />,
-    description: 'Stunning, Built Your Own Pixel-perfect responsive interfaces.',
+    description: 'We build responsive and user-friendly website interfaces.',
     tags: ['React', 'Tailwind', 'Motion'],
     color: '#3b82f6' // Blue
   },
   {
-    title: 'Full Stack Website',
+    title: 'Full Stack Websites',
     icon: <Layers size={28} />,
     description: 'Built Your Own Complex Web Applications With Robust Backend Systems.',
     tags: ['MERN', 'Next.js', 'API'],
     color: '#8b5cf6' // Violet
   },
   {
-    title: 'Portfolio Website',
+    title: 'Written Contents',
     icon: <Globe size={28} />,
-    description: 'Personal sites that tell your story and showcase work.',
+    description: 'Neatly Written Academic Contents , Charts and Creative Works.',
     tags: ['Personal', 'Resume', 'Blog'],
     color: '#10b981' // Green
   },
   {
-    title: 'Project Resources',
+    title: 'Project Desk',
     icon: <FileText size={28} />,
-    description: 'Presentations, reports, and documentation for projects.',
+    description: 'We Provide Innovative Project Ideas, UI References, and Ready Reports and PPTs to Support Your Academic Assessments.',
     tags: ['Docs', 'PPT', 'Reports'],
     color: '#f59e0b' // Amber
   },
   {
-    title: 'Custom Solutions',
+    title: 'Career Docs',
     icon: <Monitor size={28} />,
-    description: 'Tailormade websites for events, clubs, or business.',
+    description: 'We Create Resumes, CVs, and Cover Letters, and Optimize your LinkedIn and GitHub profiles.',
     tags: ['Events', 'E-com', 'Landing'],
     color: '#06b6d4' // Cyan
-  }
+  },
 ];
 
 const DomainCard = ({ title, icon, description, tags, color, isVisible }) => (

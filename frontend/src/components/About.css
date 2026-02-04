@@ -1,7 +1,7 @@
 /* About Container */
 .about-wrapper {
   width: 100%;
-  overflow: hidden;
+  overflow-x: hidden; /* Allow vertical overflow for the blur effect */
   background-color: transparent; /* Match global background */
   color: var(--text-main); /* Use global text color variable */
   position: relative;
@@ -16,8 +16,32 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: var(--text-main);
-  margin-top: -80px; 
+  color: white;
+  margin-top: -80px;
+  background-color: #0b0f19; /* Blackish background */
+}
+/* Remove previous gradient pseudo-element */
+/* Shape Divider Styles */
+.custom-shape-divider-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: translateY(-99%); /* Pull it UP to sit on top of the header */
+    z-index: 20; /* Ensure it covers anything from the previous section */
+}
+
+.custom-shape-divider-top svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 120px; /* Adjust waviness height */
+}
+
+.shape-fill {
+    fill: #0b0f19; /* Match the dark header background */
 }
 
 .about-header-bg {
@@ -27,16 +51,15 @@
   width: 100%;
   height: 100%;
   z-index: 0;
-  /* Optional: Keep image but make it subtle, or remove if "same background" means NO image */
-  opacity: 0.1; 
-  mix-blend-mode: overlay;
+  opacity: 0.4; 
+  mix-blend-mode: normal; /* Normal blend to show image clearly on dark */
 }
 
 .about-header-bg img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.3;
+  opacity: 0.6;
 }
 
 .about-header-overlay {
@@ -45,8 +68,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  /* Gradient to transparent instead of solid dark */
-  background: linear-gradient(180deg, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.05) 50%, transparent 100%); 
+  /* Gradient fade to bottom content */
+  background: linear-gradient(180deg, rgba(11, 15, 25, 0.3) 0%, rgba(11, 15, 25, 0.8) 80%, #0b0f19 100%);
   z-index: 1;
 }
 
@@ -65,7 +88,7 @@
   font-weight: 800;
   margin-bottom: 1rem;
   letter-spacing: -2px;
-  color: var(--text-main); /* Standard dark text */
+  color: white; /* White text for dark bg */
   background: none;
   -webkit-background-clip: border-box;
   background-clip: border-box;
@@ -80,7 +103,7 @@
 
 .about-subtitle {
   font-size: 1.25rem;
-  color: #64748b; /* Slate 500 - Light Theme text */
+  color: #cbd5e1; /* Slate 300 - readable on dark */
   max-width: 600px;
   margin-bottom: 3rem;
   line-height: 1.6;
@@ -100,10 +123,10 @@
 }
 
 .glass-stat {
-  background: rgba(255, 255, 255, 0.5); /* Lighter Glass */
+  background: rgba(255, 255, 255, 0.05); /* Dark Theme Glass */
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 1.5rem 2rem;
   border-radius: 16px;
   display: flex;
@@ -114,15 +137,15 @@
 
 .glass-stat:hover {
   transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.8);
-  border-color: rgba(99, 102, 241, 0.3); /* Primary indigo hint */
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(99, 102, 241, 0.5); /* Primary indigo hint */
 }
 
 .stat-number {
   font-size: 2rem;
   font-weight: 800;
   margin-bottom: 0.25rem;
-  color: #0f172a; /* Dark text */
+  color: white; /* Fallback */
 }
 
 .stat-label {
@@ -136,279 +159,214 @@
 .text-gradient-green { background: linear-gradient(135deg, #4ade80, #22c55e); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 .text-gradient-blue { background: linear-gradient(135deg, #60a5fa, #3b82f6); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 .text-gradient-purple { background: linear-gradient(135deg, #c084fc, #a855f7); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-.text-gradient-pink { background: linear-gradient(135deg, #f472b6, #ec4899); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 
-/* --- NEW INTERACTIVE CARD GRID --- */
-.about-content-section {
-  padding: 2rem 0 6rem 0;
-  position: relative;
-  z-index: 10;
-  perspective: 2000px; /* Add depth to the scene */
+/* Mission Card Container */
+.mission-card {
+  background: rgba(30, 41, 59, 0.3); /* Slate 800 with opacity */
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 3rem;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 100%; /* Fill the row-content which is stretched */
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
 }
 
-.about-cards-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2.5rem;
+.mission-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(96, 165, 250, 0.3);
+}
+
+/* --- NEW ZIGZAG ROW LAYOUT --- */
+.about-content-rows {
+  width: 100%;
+  position: relative;
+  z-index: 10;
+}
+
+.about-row {
+  padding: 6rem 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Background Colors */
+.bg-blue-light { background-color: #e0f2fe; color: #1e3a8a; }
+.bg-pink-light { background-color: #fce7f3; color: #831843; }
+.bg-green-light { background-color: #dcfce7; color: #14532d; }
+
+/* New Dark Mission Theme */
+.bg-dark-mission {
+  background-color: #0b0f19; /* Same dark/blackish color as header */
+  color: #bdc5d6;
+  /* Removed border to blend seamlessly */
+}
+
+.row-container {
+  display: flex;
+  align-items: stretch; /* Stretch children to equal height */
+  gap: 4rem;
   max-width: 1280px;
   margin: 0 auto;
+  padding: 0 2rem;
 }
 
-.interactive-card {
-  position: relative;
-  background-color: rgba(255, 255, 255, 0.6); /* Light Glass base */
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+/* Reverse layout for the middle section */
+.reversed-row .row-container {
+  flex-direction: row-reverse;
+}
+
+/* Visual / Image Side */
+.row-visual {
+  flex: 1;
   display: flex;
-  flex-direction: column;
-  height: 100%;
-  
-  /* 3D Transform Props */
-  transform-style: preserve-3d;
-  transform: perspective(1000px) rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg));
-  transition: transform 0.1s cubic-bezier(0.2, 0.4, 0.3, 1), box-shadow 0.3s ease;
-  
-  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1); /* Lighter shadow */
+  justify-content: center;
+  align-items: center;
 }
 
-/* Smooth return on mouse leave */
-.interactive-card:not(:hover) {
-  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.interactive-card:hover {
-  box-shadow: 
-    0 20px 40px -5px rgba(0, 0, 0, 0.1),
-    0 0 15px rgba(99, 102, 241, 0.1); /* Indigo glow */
-  z-index: 10;
-  background-color: rgba(255, 255, 255, 0.8);
-}
-
-/* Spotlight Border Effect/Background */
-.interactive-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
+.row-image {
   width: 100%;
-  height: 100%;
-  border-radius: 24px;
-  background: radial-gradient(
-    800px circle at var(--mouse-x) var(--mouse-y), 
-    rgba(99, 102, 241, 0.1), /* Indigo tint */
-    transparent 40%
-  );
-  z-index: 1;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.5s ease;
+  max-width: 500px;
+  height: auto;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.1));
+  transition: transform 0.5s ease;
 }
 
-.interactive-card:hover::before {
-  opacity: 1;
+.about-row:hover .row-image {
+  transform: translateY(-10px);
 }
 
-/* The actual "Border" line via an inner container or pseudo */
-.card-border {
-  position: absolute;
-  inset: 0;
-  border-radius: 24px;
-  padding: 1.5px; /* Thicker border */
-  background: radial-gradient(
-    400px circle at var(--mouse-x) var(--mouse-y), 
-    rgba(99, 102, 241, 0.6), /* Indigo border */
-    transparent 40%
-  );
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  z-index: 5;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.interactive-card:hover .card-border {
-  opacity: 1;
-}
-
-/* Inner content */
-.card-content-inner {
-  position: relative;
-  z-index: 3;
-  padding: 2.5rem;
-  height: 100%;
+/* Content Side */
+.row-content {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  background: rgba(255, 255, 255, 0.3); /* Transparent inner */
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: 23px; /* Slightly less than parent */
-  border: none;
-  
-  /* 3D Pop for content */
-  transform: translateZ(20px);
-  transform-style: preserve-3d;
+  align-items: flex-start;
+  text-align: left;
 }
 
-/* Icon Box */
-.card-icon-box {
-  width: 64px;
-  height: 64px;
-  border-radius: 18px;
-  display: flex;
+/* Pill Tag */
+.pill-tag {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
   margin-bottom: 1.5rem;
-  background: white;
-  border: 1px solid rgba(99, 102, 241, 0.1);
-  transform: translateZ(20px); /* Pop icon out */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.1);
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(4px);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-.box-blue { background: rgba(59, 130, 246, 0.1); color: #60a5fa; }
-.box-pink { background: rgba(236, 72, 153, 0.1); color: #f472b6; }
-.box-green { background: rgba(16, 185, 129, 0.1); color: #34d399; }
+.tag-blue { color: #2563eb; border-color: #bfdbfe; }
+.tag-pink { color: #db2777; border-color: #fbcfe8; }
+.tag-green { color: #16a34a; border-color: #bbf7d0; }
 
-/* Text */
-.interactive-title {
-  font-family: 'Outfit', sans-serif;
-  font-size: 1.75rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: #0f172a; /* Dark Title */
-  transform: translateZ(30px);
+/* Dark Theme Tag */
+.tag-blue-dark {
+  color: #60a5fa;
+  border-color: rgba(96, 165, 250, 0.3);
+  background: rgba(30, 41, 59, 0.5); /* Slate 800 with opacity */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
 }
 
-.interactive-desc {
-  font-size: 1.05rem;
-  color: #475569; /* Slate 600 */
-  line-height: 1.6;
+/* Typography */
+.row-title {
+  font-family: 'Merriweather', serif; /* Ensure imported or fallback */
+  font-size: 3rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+/* Text Colors based on bg for title */
+.bg-blue-light .row-title { color: #1e3a8a; }
+.bg-pink-light .row-title { color: #831843; }
+.bg-green-light .row-title { color: #064e3b; }
+.bg-dark-mission .row-title { 
+  color: #ffffff; 
+  font-size: 2.25rem; /* Smaller text size for 'What Exactly Is UniXHub?' */
+  letter-spacing: 0.05em; /* Added spacing */
+}
+
+.row-desc {
+  font-size: 1.15rem;
+  line-height: 1.8;
   margin-bottom: 2rem;
-  flex-grow: 1;
-  transform: translateZ(25px);
+  opacity: 0.9;
+  font-weight: 500;
+  max-width: 100%; /* Allow full width to fit in fewer lines */
+  text-align: left; /* Revert to left align for consistent spacing */
+  word-spacing: 0.15rem; /* Fixed, uniform word spacing */
+  letter-spacing: 0.02em; /* Subtle fixed letter spacing */
 }
 
-/* Visual / Illustration Area */
-.interactive-visual {
-  position: relative;
-  height: 180px;
+/* List */
+.row-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.row-list li {
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 2rem;
-  transform-style: preserve-3d;
-  transform: translateZ(40px);
-}
-
-.interactive-visual img {
-  max-height: 100%;
-  max-width: 100%;
-  position: relative;
-  z-index: 2;
-  filter: drop-shadow(0 15px 30px rgba(0,0,0,0.5));
-  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-  transform: translateZ(10px);
-}
-
-.interactive-card:hover .interactive-visual img {
-  transform: scale(1.15) translateY(-15px) rotateZ(2deg);
-}
-
-.visual-glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) translateZ(-10px); /* Push behind img */
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  filter: blur(60px);
-  opacity: 0.3;
-  z-index: 0;
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.interactive-card:hover .visual-glow {
-  opacity: 0.8;
-  transform: translate(-50%, -50%) translateZ(-10px) scale(1.2);
-}
-
-/* Glow Colors */
-.glow-blue { background: #3b82f6; }
-.glow-pink { background: #ec4899; }
-.glow-green { background: #10b981; }
-
-/* Tags */
-.interactive-tags {
-  display: flex;
-  flex-wrap: wrap;
   gap: 0.75rem;
-  transform: translateZ(30px);
+  font-size: 1.05rem;
+  font-weight: 600;
 }
 
-.tag-pill {
-  padding: 0.5rem 1rem;
-  border-radius: 100px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: #64748b;
-  background: rgba(0, 0, 0, 0.05); /* Light gray bg */
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  transition: all 0.2s ease;
-}
-
-.tag-pill:hover {
-  background: rgba(99, 102, 241, 0.1); /* Indigo tint */
-  color: #4f46e5;
-  border-color: rgba(99, 102, 241, 0.2);
-}
-
-/* Response */
+/* Responsive */
 @media (max-width: 1024px) {
-  .about-cards-container {
-    grid-template-columns: repeat(2, 1fr);
+  .row-title {
+    font-size: 2.5rem;
+  }
+  .row-container {
+    gap: 2rem;
   }
 }
 
 @media (max-width: 768px) {
-  .about-cards-container {
-    grid-template-columns: 1fr;
-    padding: 0 1rem;
+  .about-row {
+    padding: 4rem 0;
   }
   
-  .about-header-content {
-    padding-top: 5rem;
+  .row-container, .reversed-row .row-container {
+    flex-direction: column;
+    text-align: center;
   }
-  
-  .about-main-title {
-    font-size: 3rem;
-  }
-  
-  .about-header {
-    height: auto;
-    padding-bottom: 4rem;
-  }
-}
 
-@media (max-width: 600px) {
-  .about-stats-row { 
-    flex-direction: row; 
-    width: 100%; 
-    padding: 0 1rem;
-    gap: 1rem;
+  .row-content {
+    align-items: center;
+    text-align: center;
+  }
+
+  .row-image {
+    max-width: 80%;
+    margin-bottom: 2rem;
+  }
+
+  .pill-tag {
+    margin-bottom: 1rem;
   }
   
-  .glass-stat { 
-    width: calc(50% - 0.5rem); 
-    min-width: auto;
-    padding: 1.5rem 1rem;
+  .row-title {
+    font-size: 2.25rem;
+  }
+
+  .row-list {
+    align-items: flex-start; /* List looks better left aligned usually, but centered is okay if requested */
+    align-items: center;
   }
 }

@@ -79,9 +79,9 @@
 
 .typewriter-cursor {
   display: inline-block;
-  margin-left: 4px;
+  margin-left: 2px;
   font-weight: 400;
-  animation: blink 1s step-end infinite;
+  animation: blink 1s infinite;
   color: var(--primary);
   vertical-align: baseline;
 }
@@ -99,6 +99,13 @@
   letter-spacing: -0.04em;
   color: var(--text-main);
   text-shadow: 0 4px 30px rgba(0,0,0,0.1);
+}
+
+.hero-subtitle-text {
+  font-size: 4rem !important; /* Slightly smaller than 5.5rem */
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-top: 0.5rem;
 }
 
 /* Floating card styles removed per user request */
