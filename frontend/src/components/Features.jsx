@@ -1,103 +1,241 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ShieldCheck, ChevronRight,Lock, Zap, MessageSquare, Users, Award, Check } from 'lucide-react';
+import styled from 'styled-components';
+import { ShieldCheck, ChevronRight, Lock, Zap, Rocket, UserCheck, Layout, Sliders } from 'lucide-react';
 import './Features.css';
 
 const featuresData = [
   {
-    title: 'Projects Ready',
-    icon: <Award size={32} />,
-    description: 'Access real-world, ready-to-use projects to launch faster and learn practically.',
-    points: ['Real-world project experience', 'Ready-to-use solutions', 'Faster learning & launch'],
-    color: '#06b6d4' // Cyan
+    title: 'Launch without delays.',
+    icon: <Rocket size={32} />,
+    description: '', // Description is removed in the new design
+    points: ['Real projects', 'Real impact', 'Zero guesswork'],
+    color: '#3B82F6' // Blue
   },
   {
-    title: 'Expert Creators',
-    icon: <ShieldCheck size={32} />,
-    description: 'We deliver high-quality design and development with skilled professionals.',
-    points: ['Experienced designers & developers', 'Quality-checked projects', 'Modern tools & technologies'],
-    color: '#3b82f6' // Blue
+    title: 'Verified talent only.',
+    icon: <UserCheck size={32} />,
+    description: '',
+    points: ['Work with professionals who deliver', 'No experiments'],
+    color: '#06b6d4' // Cyan 
   },
   {
-    title: 'Easy Collaboration',
-    icon: <Zap size={32} />,
-    description: 'We maintain simple and clear communication during the whole project.',
-    points: ['Direct client communication', 'Regular progress updates', 'Friendly support'],
+    title: 'One space. One flow.',
+    icon: <Layout size={32} />,
+    points: ['Chat', 'Track', 'Build together seamlessly'],
     color: '#8b5cf6' // Violet
   },
   {
-    title: 'Client First Approach',
-    icon: <MessageSquare size={32} />,
-    description: 'Your satisfaction is our priority, and we deliver the best results for you.',
-    points: ['Affordable pricing', 'Unlimited support guidance', 'Long-term partnership focus'],
+    title: 'Clients stay in control.',
+    icon: <Sliders size={32} />,
+    points: ['Clear scope', 'Fair pricing', 'Full transparency'],
     color: '#ec4899' // Pink
   },
   {
-    title: 'Fast Delivery',
-    icon: <Users size={32} />,
-    description: 'We value your time and meet deadlines.',
-    points: ['On-time project delivery', 'Exclusive mentorship programs', 'Smooth workflow'],
+    title: 'Speed without shortcuts.',
+    icon: <Zap size={32} />,
+    points: ['Deadlines met', 'Quality intact'],
     color: '#f59e0b' // Amber
   },
   {
-    title: 'Reliable & Secure',
-    icon: <Lock size={32} />,
-    description: 'Your data and payments are always fully protected and secure with us.',
-    points: ['Secure payment methods', 'Client data protection', 'Transparent process'],
+    title: 'Trust built-in.',
+    icon: <ShieldCheck size={32} />,
+    points: ['Secure payments', 'Protected data', 'Peace of mind'],
     color: '#10b981' // Green
   },
 ];
 
-const BulletArrow = ({ size = 16, color }) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    className="point-icon"
-  >
-    {/* Top half - Lighter/Main Color */}
-    <path
-      d="M2 2L22 12L2 12Z"
-      fill={color}
-    />
-    {/* Bottom half - Darker/Shaded Color - using a filter hack or opacity */}
-    <path
-      d="M2 22L22 12L2 12Z"
-      fill={color}
-      style={{ filter: 'brightness(0.6)' }}
-    />
-  </svg>
-);
-
-const FeatureCard = ({ title, icon, description, points, color, isVisible, index }) => {
+const FeatureCard = ({ title, icon, points, color, isVisible, index }) => {
   return (
-    <div
-      className={`feature-card glass-card ${isVisible ? 'in-view' : ''}`}
-      style={{ '--delay': `${index * 0.15}s` }}
-    >
-      <div className="feature-icon-box" style={{
-        background: `linear-gradient(135deg, ${color}20, ${color}05)`,
-        borderColor: `${color}40`,
-        color: color
-      }}>
-        {icon}
+    <StyledWrapper $isVisible={isVisible} $delay={`${index * 0.15}s`} $color={color}>
+      <div className="card-container">
+        <div className="card">
+          <div className="icon-container">
+            {icon}
+          </div>
+          <div className="content">
+            <div className="h6">{title}</div>
+            <div className="hover_content">
+              <ul className="custom-points">
+                {points.map((point, i) => (
+                  <li key={i} className="custom-point">
+                    <ChevronRight size={16} style={{ color: color, minWidth: '16px' }} />
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>       
       </div>
-
-      <h3 className="feature-title">{title}</h3>
-      <p className="feature-desc">{description}</p>
-
-      <ul className="feature-points">
-        {points.map((point, i) => (
-          <li key={i} className="feature-point">
-            <ChevronRight size={16} className="point-icon" style={{ color: color }} />
-            <span>{point}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
+    </StyledWrapper>
   );
 };
+
+const StyledWrapper = styled.div`
+  /* Added to make sure it fits properly in the grid or parent */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  
+  /* Entry Animation */
+  opacity: ${props => props.$isVisible ? 1 : 0};
+  transform: translateY(${props => props.$isVisible ? '0' : '50px'});
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: ${props => props.$delay};
+
+  .card-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .card {
+    position: relative;
+    display: flex;
+    justify-content: flex-start; /* Align content to top so expansion prevents jumping */
+    align-items: center; 
+    flex-direction: column; 
+    cursor: pointer;
+    width: 100%; /* Fill the container width */
+    height: 380px; /* Fixed height for uniformity */
+    padding: 2.5em 0;
+    
+    /* UI Adaptation */
+    background: rgba(255, 255, 255, 0.7); 
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    
+    box-shadow: 0 0 6px 0 rgba(32, 32, 36, 0.12);
+    transition: all 0.35s ease;
+    border-radius: 24px; 
+    overflow: hidden; 
+  }
+  
+  .icon-container {
+      position: absolute;
+      top: 1.5rem;
+      left: 1.5rem;
+      color: ${props => props.$color};
+      transition: transform 0.3s ease;
+      z-index: 5;
+  }
+
+  .card:hover .icon-container {
+      transform: scale(1.1);
+  }
+
+  .card::before, .card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: ${props => props.$color};
+    height: 4px;
+    border-radius: 24px 24px 0 0;
+    z-index: 2;
+  }
+
+  .card::before {
+    width: 0;
+    opacity: 0;
+    transition: opacity 0 ease, width 0 ease;
+    transition-delay: 0.5s;
+  }
+
+  .card::after {
+    width: 100%;
+    background: white; 
+    transition: width 0.5s ease;
+  }
+
+  .card .content {
+    width: 100%;
+    max-width: 90%;
+    padding: 0 1rem;
+    box-sizing: border-box; 
+    text-align: center; 
+    
+    /* Center vertically initially */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    transition: transform 0.3s ease;
+  }
+
+  .card .h6 {
+    font-family: "Bilgie", sans-serif;
+    color: var(--text-main); 
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 0;
+    letter-spacing: 2px;
+    font-size: 1.7rem; 
+    margin-bottom: 0.5rem;
+  }
+
+  .card .hover_content {
+    overflow: hidden;
+    max-height: 0;
+    transform: translateY(1em);
+    transition: all 0.55s ease;
+  }
+
+  /* Custom list styling */
+  .custom-points {
+    list-style: none;
+    padding: 0;
+    margin: 1.5em 0 0;
+    text-align: left; 
+  }
+
+  .custom-point {
+    display: flex;
+    align-items: center;
+    font-family: "Bookman Old Style", serif;
+    font-weight: 450;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-muted); 
+    font-size: 1.13rem;
+  }
+
+  /* Hover Effects */
+  .card:hover {
+    /* Removed width change to keep grid stable */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px); 
+    background: white; 
+  }
+
+  .card:hover::before {
+    width: 100%;
+    opacity: 1;
+    transition: opacity 0.5s ease, width 0.5s ease;
+    transition-delay: 0;
+  }
+
+  .card:hover::after {
+    width: 0;
+    opacity: 0;
+    transition: width 0 ease;
+  }
+
+  .card:hover .hover_content {
+    max-height: 12em; /* Increase slightly to ensure all points fit */
+    opacity: 1;
+    transform: none;
+  }
+  
+  .card:hover .content {
+      /* Optional: shift content up slightly on hover if needed */
+      /* transform: translateY(-10px); */
+  }
+`;
 
 const Features = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -142,5 +280,6 @@ const Features = () => {
     </section>
   );
 };
+
 
 export default Features;
