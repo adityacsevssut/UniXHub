@@ -1,0 +1,201 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: calc(var(--header-height) + 2rem); /* Account for fixed nav */
+  overflow: hidden;
+}
+
+.hero-bg-glow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(80px);
+  animation: pulse-glow 8s infinite alternate;
+}
+
+.hero-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.6; /* Increased opacity and original color */
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(236, 72, 153, 0.1) 0%, transparent 60%);
+  filter: blur(80px);
+  z-index: -1;
+  animation: pulse-glow 8s infinite alternate-reverse;
+}
+
+@keyframes pulse-glow {
+  0% { opacity: 0.5; transform: scale(1); }
+  100% { opacity: 0.8; transform: scale(1.1); }
+}
+
+/* Centered Layout */
+.hero-container.centered-layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 80vh;
+}
+
+.hero-center-text {
+  text-align: center;
+  z-index: 5;
+  max-width: 900px;
+  position: relative;
+  margin-top: -120px; /* Shift text further upper */
+}
+
+/* Typewriter styles */
+.typewriter-wrapper {
+  display: inline-block;
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  margin-left: 4px;
+  font-weight: 400;
+  animation: blink 1s step-end infinite;
+  color: var(--primary);
+  vertical-align: baseline;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.hero-welcome-title {
+  font-size: 5.5rem; /* Bigger Text restored */
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  letter-spacing: -0.04em;
+  color: var(--text-main);
+  text-shadow: 0 4px 30px rgba(0,0,0,0.1);
+}
+
+/* Floating card styles removed per user request */
+
+.hero-cta-group {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 3.5rem; /* Space from title */
+  flex-wrap: wrap;
+  animation: fade-up 1s ease-out 1.5s backwards; /* Delay appearance */
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.6); /* Glassy default */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50px;
+  color: var(--text-main);
+  font-weight: 600;
+  font-size: 1.05rem;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+  text-decoration: none;
+}
+
+.hero-btn:hover {
+  transform: translateY(-4px);
+  background: white;
+  box-shadow: 0 15px 30px -5px rgba(79, 70, 229, 0.2); /* Soft Indigo Shadow */
+  color: var(--primary);
+  border-color: rgba(79, 70, 229, 0.3);
+}
+
+.hero-btn:active {
+  transform: translateY(-1px);
+}
+
+.hero-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.hero-btn:hover svg {
+  transform: scale(1.15) rotate(5deg);
+}
+
+/* Specific hover colors for fun */
+.hero-btn:nth-child(2):hover { color: #eab308; border-color: rgba(234, 179, 8, 0.3); box-shadow: 0 15px 30px -5px rgba(234, 179, 8, 0.2); } /* Features - Yellow/Zap */
+.hero-btn:nth-child(3):hover { color: #ec4899; border-color: rgba(236, 72, 153, 0.3); box-shadow: 0 15px 30px -5px rgba(236, 72, 153, 0.2); } /* Contact - Pink */
+.hero-btn:nth-child(4):hover { color: #06b6d4; border-color: rgba(6, 182, 212, 0.3); box-shadow: 0 15px 30px -5px rgba(6, 182, 212, 0.2); } /* About - Cyan */
+
+@media (max-width: 1024px) {
+  .hero-welcome-title {
+    font-size: 3.5rem;
+  }
+  .typewriter-text {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-welcome-title {
+    font-size: 3.5rem; /* Increased from 3rem */
+  }
+  .typewriter-text {
+    font-size: 2rem; /* Increased from 1.6rem */
+  }
+  
+  .hero-cta-group {
+    gap: 1rem;
+    margin-top: 2.5rem;
+  }
+  
+  .hero-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.95rem;
+    width: 100%; /* Full width on very small screens? Or keeping them auto */
+    justify-content: center;
+    flex: 1 1 40%; /* 2 per row */
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-welcome-title {
+    font-size: 2.8rem; /* Increased from 2.5rem */
+  }
+  .hero-btn {
+    flex: 1 1 100%; /* 1 per row on very small screens */
+  }
+}
