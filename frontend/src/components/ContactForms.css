@@ -116,7 +116,7 @@
 }
 
 /* Icons inside inputs */
-.input-icon {
+.contact-input-icon {
   position: absolute;
   top: 42px; 
   left: 20px;
@@ -129,7 +129,7 @@
   position: relative;
 }
 
-.field-wrapper .input-icon {
+.field-wrapper .contact-input-icon {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -137,11 +137,11 @@
   color: var(--text-muted);
 }
 
-.field-wrapper textarea + .input-icon {
+.field-wrapper textarea + .contact-input-icon {
   top: 20px; 
   transform: none;
 }
-.field-wrapper:focus-within .input-icon {
+.field-wrapper:focus-within .contact-input-icon {
     color: var(--primary);
 }
 
