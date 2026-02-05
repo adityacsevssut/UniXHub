@@ -23,10 +23,10 @@ const Navbar = () => {
 
         <div className="nav-group">
           <div className={`nav-links ${isOpen ? 'active' : ''}`}>
-            <a href="#home" className="nav-link" onClick={() => setIsOpen(false)}>Home</a>
-            <a href="#domains" className="nav-link" onClick={() => setIsOpen(false)}>Domains</a>
+            <a href="/" className="nav-link" onClick={() => setIsOpen(false)}>Home</a>
+            <a href="/domains" className="nav-link" onClick={() => setIsOpen(false)}>Get Services</a>
             <a href="/features" className="nav-link" onClick={() => setIsOpen(false)}>Features</a>
-            <a href="#community" className="nav-link" onClick={() => setIsOpen(false)}>About</a>
+            <a href="/about" className="nav-link" onClick={() => setIsOpen(false)}>About</a>
             <div className="mobile-actions">
               <button className="btn-primary">Join Now</button>
             </div>
