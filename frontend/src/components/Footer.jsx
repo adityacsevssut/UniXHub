@@ -39,8 +39,7 @@ const Footer = () => {
             <li><a href="#about">About Us</a></li>
             <li><a href="/features">Features</a></li>
             <li><a href="#testimonials">Feedbacks</a></li>
-            <li><a href="/support#feedback">Give Feedback</a></li>
-            <li><a href="/support#support">Need Help?</a></li>
+            <li><a href="/support">Support</a></li>
           </ul>
         </div>
 
@@ -59,7 +58,7 @@ const Footer = () => {
           <p className="newsletter-desc">Subscribe to get the latest student opportunities.</p>
           <form className="newsletter-form" onSubmit={(e) => e.preventDefault()}>
             <div className="input-group">
-              <Mail className="input-icon" size={18} />
+              <Mail className="footer-input-icon" size={18} />
               <input type="email" placeholder="Enter your email" required />
               <button type="submit" aria-label="Subscribe">
                 <Send size={18} />

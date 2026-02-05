@@ -34,19 +34,19 @@ const Hero = () => {
           </h1>
 
           <div className="hero-cta-group">
-            <a href="#domains" className="hero-btn">
+            <a href="/domains" className="hero-btn">
               <Layers size={20} />
               <span>Domains</span>
             </a>
-            <a href="#features" className="hero-btn">
+            <a href="/features" className="hero-btn">
               <Zap size={20} />
               <span>Features</span>
             </a>
-            <a href="#contact" className="hero-btn">
+            <a href="/contact" className="hero-btn">
               <Mail size={20} />
               <span>Contact</span>
             </a>
-            <a href="#about" className="hero-btn">
+            <a href="/about" className="hero-btn">
               <Info size={20} />
               <span>About Us</span>
             </a>
