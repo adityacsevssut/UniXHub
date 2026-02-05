@@ -82,15 +82,16 @@
 }
 
 .feature-title {
-  font-size: 1.75rem; /* Increased from 1.5rem */
-  font-weight: 700;
-  color: var(--text-main);
-  margin-bottom: 0.75rem;
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: #1e293b;
+  letter-spacing: -0.02em;
 }
 
 .feature-desc {
-  font-size: 1.15rem; /* Increased from 0.95rem */
-  color: var(--text-muted);
+  font-size: 1.15rem;
+  color: #64748b;
   line-height: 1.6;
   margin-bottom: 1.5rem;
   min-height: 3rem; /* Align lines */
@@ -144,4 +145,15 @@
   .feature-card {
     padding: 2rem;
   }
+}
+
+
+@font-face {
+  font-family: "Bilgie";
+  src: url("../assets/fonts/Bilgie.ttf");
+}
+
+@font-face {
+  font-family: "EduSAHand";
+  src: url("../assets/fonts/EduSAHand.ttf");
 }
