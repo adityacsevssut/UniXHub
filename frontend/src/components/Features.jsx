@@ -65,7 +65,7 @@ const FeatureCard = ({ title, icon, points, color, isVisible, index }) => {
               </ul>
             </div>
           </div>
-        </div>       
+        </div>
       </div>
     </StyledWrapper>
   );
@@ -168,14 +168,14 @@ const StyledWrapper = styled.div`
   }
 
   .card .h6 {
-    font-family: "Bilgie", sans-serif;
-    color: var(--text-main); 
-    font-weight: 900;
-    text-transform: uppercase;
+    font-family: 'Outfit', sans-serif; /* Matched to Domains/Global */
+    color: #1e293b; /* Slate 800 */
+    font-weight: 800;
+    text-transform: none; /* Removed uppercase */
     margin: 0;
-    letter-spacing: 2px;
-    font-size: 1.7rem; 
-    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em; /* Matched to Domains */
+    font-size: 2rem; /* Increased size */
+    margin-bottom: 1rem;
   }
 
   .card .hover_content {
@@ -196,12 +196,12 @@ const StyledWrapper = styled.div`
   .custom-point {
     display: flex;
     align-items: center;
-    font-family: "Bookman Old Style", serif;
+    font-family: 'Inter', sans-serif; /* Matched to Global */
     font-weight: 450;
     gap: 0.5rem;
     margin-bottom: 0.5rem;
-    color: var(--text-muted); 
-    font-size: 1.13rem;
+    color: #64748b; /* Slate 500 */
+    font-size: 1.15rem; /* Matched to Domains desc */
   }
 
   /* Hover Effects */
