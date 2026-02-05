@@ -22,7 +22,7 @@ const Support = () => {
           }}>
             Contact <span className="text-highlight">Support</span>
           </h1>
-          <p style={{ color: '#94a3b8', fontSize: '1.2rem', maxWidth: '600px', margin: '0 auto' }}>
+          <p style={{ color: '#94a3b8', fontSize: '1.2rem', maxWidth: '600px', margin: '2rem auto' }}>
             We appreciate your feedback and are here to help you resolve any issues.
           </p>
         </div>
