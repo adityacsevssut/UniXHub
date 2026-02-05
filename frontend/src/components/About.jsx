@@ -1,6 +1,7 @@
 import React from 'react';
 import { BookOpen, Trophy, Globe } from 'lucide-react';
 import './About.css';
+import HowItWorks from './HowItWorks';
 
 const About = () => {
   return (
@@ -45,43 +46,9 @@ const About = () => {
       </section>
 
       {/* Content Sections */}
-      <div className="about-content-rows">
+      <HowItWorks />
 
-        {/* Mission Section (Dark Theme) */}
-        <section className="about-row bg-dark-mission">
-          <div className="container row-container">
-            <div className="row-content">
-              <div className="mission-card">
-                <h2 className="row-title">To Whom UniX<span className="highlight-gradient">Hub</span> Helps?</h2>
-                <p className="row-desc">
-                  UniXHub works with students, creators, and businesses to grow their online presence professionally And make Thier Portfolio Stronger.
-                </p>
-                <ul className="row-list">
-                  <li><CheckCircleIcon color="#60a5fa" />Students Managing Tight Academic Deadlines</li>
-                  <li><CheckCircleIcon color="#60a5fa" />Students Who Need Neat And Well Presented Work.</li>
-                  <li><CheckCircleIcon color="#60a5fa" /> Students Looking For A Peer Support They Can Trust.</li>
-                  <li><CheckCircleIcon color="#60a5fa" />Skilled Students Who Wants To Earn Using Thier Abilities.</li>
-                </ul>
-              </div>
-            </div>
-            <div className="row-content">
-              <div className="mission-card">
-                <h2 className="row-title">What Exactly UniX<span className="highlight-gradient">Hub</span> Does?</h2>
-                <p className="row-desc">
-                  UniXHub is a creative digital service startup offering Design, Development, and Branding solutions to help businesses and individuals Grow Proffesional.
-                </p>
-                <ul className="row-list">
-                  <li><CheckCircleIcon color="#60a5fa" /> Builds modern websites and full-stack applications</li>
-                  <li><CheckCircleIcon color="#60a5fa" />Creates professional portfolios for students & businesses.</li>
-                  <li><CheckCircleIcon color="#60a5fa" /> Provides ready-to-use, real-world projects and solutions</li>
-                  <li><CheckCircleIcon color="#60a5fa" /> Designs logos, branding, and social media creatives</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-      </div>
+      
     </div>
   );
 };
