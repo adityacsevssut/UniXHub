@@ -1,5 +1,6 @@
 import React from 'react';
 import { Layout, Palette, Code, Layers, FileText, Server, Monitor, Globe, CheckCircle, ArrowUpRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import './Domains.css';
 
 const domains = [
@@ -8,7 +9,8 @@ const domains = [
     icon: <Palette size={28} />,
     description: 'Design Your Logos and Create Branding, Social Media Posts, and Banners for Your Business.',
     tags: ['Branding', 'UI/UX', 'Social Media'],
-    color: '#ec4899' // Pink
+    color: '#ec4899', // Pink
+    path: '/graphic-design'
   },
   {
     title: 'FrontEnd Development',
@@ -47,25 +49,37 @@ const domains = [
   },
 ];
 
-const DomainCard = ({ title, icon, description, tags, color, isVisible }) => (
-  <div className={`domain-card glass-card ${isVisible ? 'in-view' : ''}`}>
-    <div className="card-header centered-header">
-      <div className="domain-icon-wrapper" style={{
-        backgroundColor: `${color}10`,
-        borderColor: `${color}30`,
-        color: color
-      }}>
-        {icon}
+const DomainCard = ({ title, icon, description, tags, color, isVisible, path }) => {
+  const navigate = useNavigate();
+
+  const handleExplore = () => {
+    if (path) {
+      navigate(path);
+    }
+  };
+
+  return (
+    <div className={`domain-card glass-card ${isVisible ? 'in-view' : ''}`}>
+      <div className="card-header centered-header">
+        <div className="domain-icon-wrapper" style={{
+          backgroundColor: `${color}10`,
+          borderColor: `${color}30`,
+          color: color
+        }}>
+          {icon}
+        </div>
+      </div>
+
+      <div className="domain-content centered-content">
+        <h3 className="domain-title">{title}</h3>
+        <p className="domain-desc">{description}</p>
+        <button className="domain-explore-btn" onClick={handleExplore}>
+          Explore <ArrowUpRight size={18} />
+        </button>
       </div>
     </div>
-
-    <div className="domain-content centered-content">
-      <h3 className="domain-title">{title}</h3>
-      <p className="domain-desc">{description}</p>
-      <button className="domain-explore-btn">Explore <ArrowUpRight size={18} /></button>
-    </div>
-  </div>
-);
+  );
+};
 
 const Domains = () => {
   const [isVisible, setIsVisible] = React.useState(false);

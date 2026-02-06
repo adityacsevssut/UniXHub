@@ -1,0 +1,225 @@
+/* Graphic Design Page Styles */
+.gd-page {
+  min-height: 100vh;
+  /* background-color removed to show global grid background */
+  color: var(--text-main); /* Updated to match global theme */
+  padding-top: 80px; /* Navbar height */
+}
+
+/* Ensure global grid bg is visible if used in App */
+.gd-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  position: relative;
+  z-index: 10;
+}
+
+.gd-header {
+  text-align: center;
+  margin-bottom: 4rem;
+  animation: fadeInDown 0.8s ease-out;
+  position: relative;
+}
+
+.gd-back-btn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50px;
+  color: #475569;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  font-size: 0.95rem;
+}
+
+.gd-back-btn:hover {
+  transform: translateX(-5px);
+  color: var(--primary);
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);
+}
+
+.gd-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  letter-spacing: -1px;
+}
+
+.gd-subtitle {
+  font-size: 1.2rem;
+  color: #64748b; /* Slate 500 for better contrast on light bg */
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Actions Grid */
+.gd-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  margin-bottom: 5rem;
+}
+
+.gd-action-card {
+  padding: 2.5rem 1.5rem;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  
+  /* Glass card style for light theme */
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.05); /* Soft shadow */
+}
+
+.gd-action-card:hover {
+  transform: translateY(-10px);
+  background: white;
+  border-color: rgba(79, 70, 229, 0.2); /* Slight Indigo tint on border */
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
+}
+
+.gd-icon-wrapper {
+  background: rgba(241, 245, 249, 0.8); /* Slate 100 */
+  width: 80px;
+  height: 80px;
+  border-radius: 20px; /* Squircle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.gd-action-card:hover .gd-icon-wrapper {
+    transform: scale(1.1);
+}
+
+.gd-action-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+  min-height: 3.5rem; /* Align buttons */
+  color: var(--text-main);
+  font-weight: 700;
+}
+
+.gd-btn {
+  background: var(--btn-color); /* Solid color instead of gradient */
+  border: none;
+  padding: 0.8rem 1.8rem;
+  border-radius: 50px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  box-shadow: 0 4px 15px -3px rgba(0,0,0,0.2);
+}
+
+.gd-btn:hover {
+  filter: brightness(0.9); /* Simple darken on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -5px rgba(0, 0, 0, 0.2);
+}
+
+/* Services Section */
+.gd-services-section {
+  padding: 2rem 0;
+}
+
+.gd-services-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.gd-service-item {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  
+  /* Lighter glass style */
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.gd-service-item:hover {
+  background: white;
+  transform: translateX(8px);
+  border-color: rgba(79, 70, 229, 0.2);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.service-icon {
+  color: var(--primary);
+  background: rgba(79, 70, 229, 0.1);
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.service-info h4 {
+  margin: 0 0 0.3rem 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.service-info p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #64748b;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .gd-title {
+    font-size: 2.5rem;
+    margin-top: 3rem;
+  }
+  
+  .gd-back-btn {
+    position: relative;
+    margin-bottom: 1rem;
+    display: inline-flex;
+    left: 0; /* Reset */
+  }
+  
+  .gd-actions-grid {
+    grid-template-columns: 1fr;
+  }
+}
