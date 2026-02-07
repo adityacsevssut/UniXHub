@@ -48,21 +48,32 @@ const domains = [
 ];
 
 const DomainCard = ({ title, icon, description, tags, color, isVisible }) => (
-  <div className={`domain-card glass-card ${isVisible ? 'in-view' : ''}`}>
-    <div className="card-header centered-header">
-      <div className="domain-icon-wrapper" style={{
-        backgroundColor: `${color}10`,
-        borderColor: `${color}30`,
-        color: color
-      }}>
-        {icon}
-      </div>
-    </div>
+  <div 
+    className={`domain-card ${isVisible ? 'in-view' : ''}`}
+    style={{ 
+      '--card-bg': `${color}dd`, // Adjusted alpha for "slight lighter" effect
+      '--card-hover-bg': '#f8fafc' // Very light slate for contrast
+    }}
+  >
+    {/* Default State: Title only */}
+    <h3 className="domain-card-title-default">{title}</h3>
 
-    <div className="domain-content centered-content">
-      <h3 className="domain-title">{title}</h3>
-      <p className="domain-desc">{description}</p>
-      <button className="domain-explore-btn">Explore <ArrowUpRight size={18} /></button>
+    {/* Hover State: Top Right Overlay (Background effect) */}
+    <div className="domain-card-overlay-top"></div>
+
+    {/* Hover State: Bottom Left Overlay (Content holder) */}
+    <div className="domain-card-overlay-bottom">
+      {/* Icon positioned Top Left in Hover state */}
+      <div className="hover-icon-wrapper">
+        {React.cloneElement(icon, { size: 32 })}
+      </div>
+
+      <div className="hover-content">
+        <p className="domain-desc-hover">{description}</p>
+        <button className="domain-btn-hover">
+          Explore <ArrowUpRight size={18} />
+        </button>
+      </div>
     </div>
   </div>
 );

@@ -1,6 +1,8 @@
+/* Domain Card Design Update */
 .domains-section {
   position: relative;
   z-index: 10;
+  padding: 4rem 0;
 }
 
 .domains-section .section-title {
@@ -10,117 +12,182 @@
   margin-bottom: 0.5rem;
 }
 
-@media (max-width: 768px) {
-  .domains-section .section-title {
-    font-size: 2.25rem;
-  }
+.text-gradient {
+  background: linear-gradient(to right, #4f46e5, #06b6d4);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .domains-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2.5rem;
   padding: 1rem 0;
 }
 
+/* User Requested Design Implementation */
 .domain-card {
-  padding: 2.5rem;
-  display: flex;
-  flex-direction: column;
   position: relative;
+  width: 100%;
+  min-height: 320px;
+  background: var(--card-bg, mediumturquoise);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  cursor: pointer;
   overflow: hidden;
-  height: 100%;
-  border: 1px solid rgba(139, 92, 246, 0.1);
-  background: white;
-  border-radius: 24px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
-  transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform, opacity, filter;
+  transition: all 0.5s;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   
-  /* Animation Initial State - Stylish Entrance */
+  /* Entrance Animation */
   opacity: 0;
-  transform: translateY(100px) scale(0.85) perspective(1000px) rotateX(15deg);
-  filter: blur(4px);
+  transform: translateY(50px);
 }
 
 .domain-card.in-view {
   opacity: 1;
-  transform: translateY(0) scale(1) perspective(1000px) rotateX(0deg);
-  filter: blur(0);
+  transform: translateY(0);
 }
 
-/* Staggered Delays for "Cascade" effect */
+/* Staggered Delays */
 .domain-card:nth-child(1) { transition-delay: 0.1s; }
-.domain-card:nth-child(2) { transition-delay: 0.25s; }
-.domain-card:nth-child(3) { transition-delay: 0.4s; }
-.domain-card:nth-child(4) { transition-delay: 0.55s; }
-.domain-card:nth-child(5) { transition-delay: 0.7s; }
-.domain-card:nth-child(6) { transition-delay: 0.85s; }
+.domain-card:nth-child(2) { transition-delay: 0.2s; }
+.domain-card:nth-child(3) { transition-delay: 0.3s; }
+.domain-card:nth-child(4) { transition-delay: 0.4s; }
+.domain-card:nth-child(5) { transition-delay: 0.5s; }
+.domain-card:nth-child(6) { transition-delay: 0.6s; }
 
-.domain-card:hover {
-  transition-duration: 0.4s; /* Faster for hover */
-  transition-delay: 0s !important; 
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 40px -5px rgba(139, 92, 246, 0.15), 0 10px 10px -5px rgba(139, 92, 246, 0.05);
-  border-color: rgba(139, 92, 246, 0.4);
-  z-index: 5;
-}
-
-.card-header.centered-header {
-  justify-content: center;
-  width: 100%;
-  margin-bottom: 2rem;
-}
-
-.domain-content.centered-content {
+/* Main Title (Visible by default) */
+.domain-card-title-default {
+  font-size: 25px;
+  font-weight: bold;
+  color: white; /* Creating contrast against colored bg */
   text-align: center;
+  padding: 1rem;
+  z-index: 1;
+  transition: opacity 0.3s;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.domain-card:hover .domain-card-title-default {
+  opacity: 0;
+}
+
+/* Top Right Overlay (Mimicking ::before) */
+.domain-card-overlay-top {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20%;
+  height: 20%;
+  background-color: var(--card-hover-bg, #f0f9ff);
+  border-radius: 0 15px 0 100%;
+  transition: all 0.5s;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Bottom Left Overlay (Mimicking ::after) */
+.domain-card-overlay-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 20%;
+  height: 20%;
+  background-color: var(--card-hover-bg, #f0f9ff);
+  border-radius: 0 100% 0 15px;
+  transition: all 0.5s;
+  z-index: 3; /* Higher than top overlay to cover it */
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex-grow: 1;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0; /* Hidden initially (or just small) */
 }
 
-.domain-icon-wrapper {
-  width: 72px; /* Slightly bigger icon wrapper */
-  height: 72px;
-  border-radius: 20px;
+/* Hover States for Overlays */
+.domain-card:hover .domain-card-overlay-top {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+}
+
+.domain-card:hover .domain-card-overlay-bottom {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  opacity: 1;
+}
+
+/* Hover Content (Description + Button) */
+.hover-content {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(139, 92, 246, 0.2);
-  background: rgba(139, 92, 246, 0.05); /* Very light purple bg */
-  color: var(--primary);
-  backdrop-filter: blur(10px);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease 0.2s; /* Delay to wait for expansion */
+  width: 100%;
+  height: 100%;
 }
 
-.domain-title {
-  font-size: 2rem; /* Increased size */
-  font-weight: 800;
-  margin-bottom: 1rem;
-  color: #1e293b; /* Slate 800 */
-  letter-spacing: -0.02em;
+.domain-card:hover .hover-content {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.domain-desc {
-  color: #64748b; /* Slate 500 */
-  margin-bottom: 0;
-  line-height: 1.6;
-  font-size: 1.15rem; /* Increased size */
+/* Icon in Hover State (Top Left) */
+.hover-icon-wrapper {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: var(--card-bg); /* Use the main color for branding */
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 0.4s ease 0.3s;
+  /* Ensure icon is visible against light background */
 }
 
-.domain-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+.domain-card:hover .hover-icon-wrapper {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Text Styling in Hover */
+.domain-desc-hover {
+  font-size: 1.1rem;
+  color: #334155;
   margin-bottom: 1.5rem;
+  font-weight: 500;
+  line-height: 1.6;
 }
 
-.tag {
-  font-size: 0.75rem;
-  padding: 0.35rem 0.85rem;
+.domain-btn-hover {
+  padding: 0.8rem 2rem;
+  background-color: var(--card-bg);
+  color: white;
+  border: none;
   border-radius: 50px;
-  border: 1px solid;
-  font-weight: 600;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: transform 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.domain-btn-hover:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
 }
 
 /* Responsive */
@@ -129,33 +196,8 @@
   margin-bottom: 3rem;
 }
 
-.domain-explore-btn {
-  margin-top: 1.5rem;
-  padding: 0.6rem 2rem;
-  background: white;
-  border: 1px solid rgba(139, 92, 246, 0.3);
-  color: var(--primary);
-  font-weight: 600;
-  font-size: 0.95rem;
-  border-radius: 12px; /* Rectangle style */
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-}
-
-.domain-explore-btn:hover {
-  background: var(--primary);
-  color: white;
-  border-color: var(--primary);
-  box-shadow: 0 8px 15px rgba(79, 70, 229, 0.25);
-  transform: translateY(-2px);
-}
-
 @media (max-width: 768px) {
-  .domains-grid {
-    grid-template-columns: 1fr;
+  .domains-section .section-title {
+    font-size: 2.25rem;
   }
 }
