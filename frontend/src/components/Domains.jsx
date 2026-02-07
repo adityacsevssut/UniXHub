@@ -1,5 +1,6 @@
 import React from 'react';
 import { Layout, Palette, Code, Layers, FileText, Server, Monitor, Globe, CheckCircle, ArrowUpRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import './Domains.css';
 
 const domains = [
@@ -8,7 +9,8 @@ const domains = [
     icon: <Palette size={28} />,
     description: 'Design Your Logos and Create Branding, Social Media Posts, and Banners for Your Business.',
     tags: ['Branding', 'UI/UX', 'Social Media'],
-    color: '#ec4899' // Pink
+    color: '#ec4899', // Pink
+    path: '/graphic-design'
   },
   {
     title: 'FrontEnd Development',
@@ -47,36 +49,49 @@ const domains = [
   },
 ];
 
-const DomainCard = ({ title, icon, description, tags, color, isVisible }) => (
-  <div 
-    className={`domain-card ${isVisible ? 'in-view' : ''}`}
-    style={{ 
-      '--card-bg': `${color}dd`, // Adjusted alpha for "slight lighter" effect
-      '--card-hover-bg': '#f8fafc' // Very light slate for contrast
-    }}
-  >
-    {/* Default State: Title only */}
-    <h3 className="domain-card-title-default">{title}</h3>
 
-    {/* Hover State: Top Right Overlay (Background effect) */}
-    <div className="domain-card-overlay-top"></div>
+const DomainCard = ({ title, icon, description, tags, color, isVisible, path }) => {
+  const navigate = useNavigate();
 
-    {/* Hover State: Bottom Left Overlay (Content holder) */}
-    <div className="domain-card-overlay-bottom">
-      {/* Icon positioned Top Left in Hover state */}
-      <div className="hover-icon-wrapper">
-        {React.cloneElement(icon, { size: 32 })}
-      </div>
+  const handleExplore = (e) => {
+    e.stopPropagation(); // Prevent bubbling if card itself becomes clickable later
+    if (path) {
+      navigate(path);
+      window.scrollTo(0, 0);
+    }
+  };
 
-      <div className="hover-content">
-        <p className="domain-desc-hover">{description}</p>
-        <button className="domain-btn-hover">
-          Explore <ArrowUpRight size={18} />
-        </button>
+  return (
+    <div 
+      className={`domain-card ${isVisible ? 'in-view' : ''}`}
+      style={{ 
+        '--card-bg': `${color}dd`, // Adjusted alpha for "slight lighter" effect
+        '--card-hover-bg': '#f8fafc' // Very light slate for contrast
+      }}
+    >
+      {/* Default State: Title only */}
+      <h3 className="domain-card-title-default">{title}</h3>
+
+      {/* Hover State: Top Right Overlay (Background effect) */}
+      <div className="domain-card-overlay-top"></div>
+
+      {/* Hover State: Bottom Left Overlay (Content holder) */}
+      <div className="domain-card-overlay-bottom">
+        {/* Icon positioned Top Left in Hover state */}
+        <div className="hover-icon-wrapper">
+          {React.cloneElement(icon, { size: 32 })}
+        </div>
+
+        <div className="hover-content">
+          <p className="domain-desc-hover">{description}</p>
+          <button className="domain-btn-hover" onClick={handleExplore}>
+            Explore <ArrowUpRight size={18} />
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 const Domains = () => {
   const [isVisible, setIsVisible] = React.useState(false);

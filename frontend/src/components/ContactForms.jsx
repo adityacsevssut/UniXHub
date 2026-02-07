@@ -25,14 +25,14 @@ const ContactForms = () => {
                 <label>Name</label>
                 <div className="field-wrapper">
                   <input type="text" placeholder="Your Name" required />
-                  <User size={18} className="input-icon" />
+                  <User size={18} className="contact-input-icon" />
                 </div>
               </div>
               <div className="form-group">
                 <label>Email</label>
                 <div className="field-wrapper">
                   <input type="email" placeholder="your@email.com" required />
-                  <Mail size={18} className="input-icon" />
+                  <Mail size={18} className="contact-input-icon" />
                 </div>
               </div>
               <div className="form-group">
@@ -46,9 +46,9 @@ const ContactForms = () => {
                 <Send size={18} />
               </button>
             </form>
-            
+
             <div className="form-footer-link">
-               <p>Facing technical issues? <button onClick={() => setActiveForm('help')} className="text-link">Need Help?</button></p>
+              <p>Facing technical issues? <button onClick={() => setActiveForm('help')} className="text-link">Need Help?</button></p>
             </div>
           </div>
         ) : (
@@ -67,7 +67,7 @@ const ContactForms = () => {
                 <label>Name</label>
                 <div className="field-wrapper">
                   <input type="text" placeholder="Your Name" required />
-                  <User size={18} className="input-icon" />
+                  <User size={18} className="contact-input-icon" />
                 </div>
               </div>
               <div className="form-group">
@@ -79,7 +79,7 @@ const ContactForms = () => {
                     <option>Account Issue</option>
                     <option>Other</option>
                   </select>
-                  <AlertCircle size={18} className="input-icon" />
+                  <AlertCircle size={18} className="contact-input-icon" />
                 </div>
               </div>
               <div className="form-group">
@@ -95,7 +95,7 @@ const ContactForms = () => {
             </form>
 
             <div className="form-footer-link">
-               <p>Want to share feedback? <button onClick={() => setActiveForm('feedback')} className="text-link">Go to Feedback</button></p>
+              <p>Want to share feedback? <button onClick={() => setActiveForm('feedback')} className="text-link">Go to Feedback</button></p>
             </div>
           </div>
         )}
