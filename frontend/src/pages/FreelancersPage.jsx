@@ -400,9 +400,52 @@ const FreelancersPage = () => {
   const navigate = useNavigate();
   const categoryTitle = location.state?.category || "Available Freelancers";
 
+  /* State for Freelancers Data */
+  const [freelancers, setFreelancers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    const fetchFreelancers = async () => {
+      try {
+        // Use serviceId if provided, otherwise category, or default empty to get all
+        const queryParam = location.state?.serviceId || location.state?.category || '';
+        const url = queryParam
+          ? `http://localhost:5000/api/partners?serviceId=${encodeURIComponent(queryParam)}`
+          : 'http://localhost:5000/api/partners';
+
+        const res = await fetch(url);
+        if (!res.ok) throw new Error('Failed to fetch');
+
+        const data = await res.json();
+
+        if (data.length > 0) {
+          // Map backend data to UI format
+          const mappedData = data.map(p => ({
+            id: p._id,
+            name: p.name,
+            role: 'Verified Partner',
+            image: `https://ui-avatars.com/api/?name=${encodeURIComponent(p.name)}&background=random&size=200`,
+            specialty: p.serviceId
+          }));
+          setFreelancers(mappedData);
+        } else {
+          // Fallback: If empty, show empty state (or mock if strictly needed, but let's stick to real data check)
+          setFreelancers([]);
+        }
+      } catch (err) {
+        console.error(err);
+        setFreelancers(freelancersData); // Fallback to mock on error
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFreelancers();
+  }, [location.state]);
 
   // State for Contact Modal
   const [selectedFreelancer, setSelectedFreelancer] = useState(null);
@@ -430,43 +473,52 @@ const FreelancersPage = () => {
           <Subtitle>Expert designers ready to bring your vision to life</Subtitle>
         </Header>
 
-        <Grid>
-          {freelancersData.map((freelancer) => (
-            <CardWrapper key={freelancer.id}>
-              <div className="book">
-                <div className="back-content">
-                  <h4>{freelancer.specialty}</h4>
-                  <div className="actions">
-                    <button
-                      className="action-btn work-btn"
-                      onClick={() => navigate('/portfolio', { state: { freelancer } })}
-                    >
-                      <ExternalLink size={16} /> View Work
-                    </button>
-                    <button
-                      className="action-btn contact-btn"
-                      onClick={() => navigate('/chat', { state: { freelancer } })}
-                    >
-                      <Mail size={16} /> Contact Now
-                    </button>
-                  </div>
-                </div>
-
-                <div className="cover">
-                  <div className="cover-content">
-                    <div className="img-container">
-                      <img src={freelancer.image} alt={freelancer.name} />
+        {loading ? (
+          <p style={{ textAlign: 'center', fontSize: '1.2rem', color: '#64748b' }}>Loading experts...</p>
+        ) : freelancers.length > 0 ? (
+          <Grid>
+            {freelancers.map((freelancer) => (
+              <CardWrapper key={freelancer.id}>
+                <div className="book">
+                  <div className="back-content">
+                    <h4>{freelancer.specialty}</h4>
+                    <div className="actions">
+                      <button
+                        className="action-btn work-btn"
+                        onClick={() => navigate('/portfolio', { state: { freelancer } })}
+                      >
+                        <ExternalLink size={16} /> View Work
+                      </button>
+                      <button
+                        className="action-btn contact-btn"
+                        onClick={() => navigate('/chat', { state: { freelancer } })}
+                      >
+                        <Mail size={16} /> Contact Now
+                      </button>
                     </div>
-                    <h3>{freelancer.name}</h3>
-                    <span className="role">{freelancer.role}</span>
+                  </div>
+
+                  <div className="cover">
+                    <div className="cover-content">
+                      <div className="img-container">
+                        <img src={freelancer.image} alt={freelancer.name} />
+                      </div>
+                      <h3>{freelancer.name}</h3>
+                      <span className="role">{freelancer.role}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </CardWrapper>
-          ))}
-        </Grid>
+              </CardWrapper>
+            ))}
+          </Grid>
+        ) : (
+          <div style={{ textAlign: 'center', padding: '4rem', color: '#64748b' }}>
+            <h3>No partners available for this service yet.</h3>
+            <p>Check back soon!</p>
+          </div>
+        )}
 
-        {/* Contact Modal (Kept if needed for other flows or future use) */}
+        {/* Contact Modal */}
         {isModalOpen && selectedFreelancer && (
           <ModalOverlay onClick={closeContactModal}>
             <ModalContent onClick={(e) => e.stopPropagation()}>
@@ -481,7 +533,6 @@ const FreelancersPage = () => {
 
               <ContactForm onSubmit={(e) => {
                 e.preventDefault();
-                // Navigate to chat with "message sent" state or just start chatting
                 navigate('/chat', { state: { freelancer: selectedFreelancer } });
               }}>
                 <FormGroup>

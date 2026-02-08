@@ -38,49 +38,38 @@
   border-radius: 15px;
   cursor: pointer;
   overflow: hidden;
-  transition: all 0.5s;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  border: 1px solid rgba(139, 92, 246, 0.1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity, filter;
   
-  /* Entrance Animation */
+  /* Animation Initial State - Stylish Entrance */
   opacity: 0;
-  transform: translateY(50px);
+  transform: translateY(100px) scale(0.85) perspective(1000px) rotateX(15deg);
+  filter: blur(4px);
 }
 
 .domain-card.in-view {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1) perspective(1000px) rotateX(0deg);
+  filter: blur(0);
 }
 
-/* Staggered Delays */
+/* Staggered Delays for "Cascade" effect */
 .domain-card:nth-child(1) { transition-delay: 0.1s; }
-.domain-card:nth-child(2) { transition-delay: 0.2s; }
-.domain-card:nth-child(3) { transition-delay: 0.3s; }
-.domain-card:nth-child(4) { transition-delay: 0.4s; }
-.domain-card:nth-child(5) { transition-delay: 0.5s; }
-.domain-card:nth-child(6) { transition-delay: 0.6s; }
+.domain-card:nth-child(2) { transition-delay: 0.25s; }
+.domain-card:nth-child(3) { transition-delay: 0.4s; }
+.domain-card:nth-child(4) { transition-delay: 0.55s; }
+.domain-card:nth-child(5) { transition-delay: 0.7s; }
+.domain-card:nth-child(6) { transition-delay: 0.85s; }
 
-/* Main Title (Visible by default) */
-.domain-card-title-default {
-  font-size: 25px;
-  font-weight: bold;
-  color: white; /* Creating contrast against colored bg */
-  text-align: center;
-  padding: 1rem;
-  z-index: 1;
-  transition: opacity 0.3s;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.domain-card:hover .domain-card-title-default {
-  opacity: 0;
-}
-
-/* New Top Right Arrow */
-.top-right-arrow {
-  position: absolute;
-  top: 2rem;
-  right: 2rem;
-  color: white;
+.domain-card:hover {
+  transition-duration: 0.4s; /* Faster for hover */
+  transition-delay: 0s !important; 
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px -5px rgba(139, 92, 246, 0.15), 0 10px 10px -5px rgba(139, 92, 246, 0.05);
+  border-color: rgba(139, 92, 246, 0.4);
   z-index: 5;
   transition: all 0.4s ease;
   opacity: 1;
