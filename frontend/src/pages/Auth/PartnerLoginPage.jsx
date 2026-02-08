@@ -120,19 +120,7 @@ const PartnerLoginPage = () => {
             {loading ? <div className="btn-spinner"></div> : 'Partner Sign In'}
           </button>
 
-          <button
-            type="button"
-            className="auth-btn secondary-btn"
-            onClick={() => navigate('/partner/dashboard')}
-            style={{
-              marginTop: '1rem',
-              background: 'transparent',
-              border: '2px solid var(--secondary-color)',
-              color: 'var(--secondary-color)'
-            }}
-          >
-            Enter Panel Section
-          </button>
+
         </form>
 
         <div className="auth-footer">

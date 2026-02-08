@@ -111,13 +111,15 @@ const Domains = () => {
     try {
       const res = await fetch('http://localhost:5000/api/services');
       const data = await res.json();
-      setServices(data);
+      setServices(data.length > 0 ? data : domains); // Use fallback if empty
     } catch (err) {
-      console.error('Failed to fetch services');
+      console.error('Failed to fetch services', err);
+      setServices(domains); // Use fallback on error
     }
   };
 
   React.useEffect(() => {
+    // If services (including fallback) is empty, return
     if (services.length === 0) return;
 
     const observer = new IntersectionObserver(
@@ -146,6 +148,10 @@ const Domains = () => {
 
   // Helper to map icon string to component
   const getIcon = (iconName) => {
+    if (!iconName) return <Code size={28} />; // Default
+    // Check if iconName is a string (from DB) or a React Element (from fallback)
+    if (React.isValidElement(iconName)) return iconName;
+
     const iconProps = { size: 28 };
     switch (iconName) {
       case 'Palette': return <Palette {...iconProps} />;
@@ -172,11 +178,11 @@ const Domains = () => {
         <div className="domains-grid">
           {services.map((service, index) => (
             <DomainCard
-              key={service._id}
+              key={service._id || index}
               title={service.title}
               description={service.description}
               color={service.color}
-              icon={getIcon(service.iconName)}
+              icon={service.icon || getIcon(service.iconName)}
               tags={service.tags}
               path={service.path}
               isVisible={isVisible}

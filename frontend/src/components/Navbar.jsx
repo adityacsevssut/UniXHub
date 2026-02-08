@@ -43,7 +43,7 @@ const Navbar = () => {
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="nav-container">
         <div className="logo" onClick={() => navigate('/')}>
-          UniXHub
+          <span>UniX<span className="text-highlight">Hub</span></span>
         </div>
 
         <div className={`nav-links ${isOpen ? 'active' : ''}`}>
@@ -53,33 +53,39 @@ const Navbar = () => {
           <a onClick={() => navigate('/about')}>About</a>
         </div>
 
-        <div className="search-bar-container">
-          <input placeholder="Search services..." />
-          <Search size={18} />
-        </div>
+        <div className="nav-right-group">
+          <div className="search-bar-container">
+            <input placeholder="Search services..." />
+            <Search size={18} />
+          </div>
 
-        <div className="nav-actions">
-          {user ? (
-            <div ref={profileRef}>
-              <div onClick={() => setProfileOpen(!profileOpen)}>
-                {user.name?.charAt(0) || 'U'}
-              </div>
-
-              {profileOpen && (
-                <div>
-                  <p>{user.email}</p>
-                  <button onClick={handleLogout}>
-                    <LogOut size={16} /> Logout
-                  </button>
+          <div className="nav-actions">
+            {user ? (
+              <div className="user-profile-container" ref={profileRef}>
+                <div className="user-profile-icon" onClick={() => setProfileOpen(!profileOpen)}>
+                  {user.name?.charAt(0).toUpperCase() || 'U'}
                 </div>
-              )}
-            </div>
-          ) : (
-            <button onClick={() => navigate('/login')}>Login</button>
-          )}
 
-          <div onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <X /> : <Menu />}
+                {profileOpen && (
+                  <div className="profile-dropdown">
+                    <div className="dropdown-header">
+                      <span className="dropdown-name">{user.name}</span>
+                      <span className="dropdown-email">{user.email}</span>
+                    </div>
+                    <div className="dropdown-divider"></div>
+                    <button className="dropdown-item" onClick={handleLogout}>
+                      <LogOut size={16} /> Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <button className="btn-secondary" onClick={() => navigate('/login')}>Login</button>
+            )}
+
+            <div className="menu-icon" onClick={() => setIsOpen(!isOpen)}>
+              {isOpen ? <X /> : <Menu />}
+            </div>
           </div>
         </div>
       </div>
