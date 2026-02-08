@@ -60,11 +60,12 @@
 /* Visualization Area */
 .hiw-visual-wrapper {
     position: relative;
-    height: 350px;
+    height: 450px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 2rem;
+    margin: 2rem auto 0;
+    max-width: 1200px;
 }
 
 /* SVG Styling */
@@ -133,19 +134,28 @@
 }
 
 /* Node Positioning (Matching SVG Peaks) */
+/* Node Positioning (Matching SVG Peaks) */
 .step-1 {
-    left: 20%;
-    top: 30%;
+    left: 8%;
+    top: 80%;
 }
 
 .step-2 {
-    left: 50%;
-    top: 70%;
+    left: 34%;
+    top: 40%;
+    animation-delay: 1.5s;
 }
 
 .step-3 {
-    left: 80%;
-    top: 30%;
+    left: 60%;
+    top: 70%;
+    animation-delay: 3s;
+}
+
+.step-4 {
+    left: 88%;
+    top: 15%;
+    animation-delay: 4.5s;
 }
 
 /* The Circle Icon Wrapper */
@@ -315,13 +325,7 @@
     animation: floatNode 6s ease-in-out infinite;
 }
 
-.step-2 {
-    animation-delay: 2s;
-}
 
-.step-3 {
-    animation-delay: 4s;
-}
 
 /* Responsive adjustments */
 @media (max-width: 900px) {
