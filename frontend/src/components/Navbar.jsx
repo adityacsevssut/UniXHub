@@ -1,10 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, Rocket, Search } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Menu, X, Rocket, Search, User as UserIcon, LogOut } from 'lucide-react';
+import { useNavigate, Link } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [user, setUser] = useState(null);
+  const [profileOpen, setProfileOpen] = useState(false); // New state for profile dropdown
+  const profileRef = useRef(null);
+
+  useEffect(() => {
+    // Check for logged in user
+    const savedUser = localStorage.getItem('user');
+    if (savedUser) {
+      setUser(JSON.parse(savedUser));
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    setUser(null);
+    window.location.href = '/login';
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -12,6 +30,20 @@ const Navbar = () => {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
+        setProfileOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
 
   return (
@@ -28,7 +60,11 @@ const Navbar = () => {
             <a href="/features" className="nav-link" onClick={() => setIsOpen(false)}>Features</a>
             <a href="/about" className="nav-link" onClick={() => setIsOpen(false)}>About</a>
             <div className="mobile-actions">
-              <button className="btn-primary">Join Now</button>
+              {user ? (
+                <button className="btn-primary" onClick={handleLogout}>Log Out</button>
+              ) : (
+                <button className="btn-primary" onClick={() => window.location.href = '/register'}>Join Now</button>
+              )}
             </div>
           </div>
 
@@ -38,7 +74,33 @@ const Navbar = () => {
           </div>
 
           <div className="nav-actions">
-            <button className="btn-secondary">Login</button>
+            {user ? (
+              <div className="user-profile-container" style={{ position: 'relative' }} ref={profileRef}>
+                <div
+                  className="user-profile-icon"
+                  onClick={() => setProfileOpen(!profileOpen)}
+                >
+                  <span style={{ fontSize: '1.2rem', fontWeight: '700' }}>
+                    {user.firstName ? user.firstName.charAt(0).toUpperCase() : (user.name?.charAt(0).toUpperCase() || 'U')}
+                  </span>
+                </div>
+
+                {profileOpen && (
+                  <div className="profile-dropdown">
+                    <div className="dropdown-header">
+                      <span className="dropdown-name">Hi, {user.name?.split(' ')[0] || 'User'}</span>
+                      <span className="dropdown-email">{user.email}</span>
+                    </div>
+                    <div className="dropdown-divider"></div>
+                    <button className="dropdown-item" onClick={handleLogout}>
+                      <LogOut size={16} /> Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <button className="btn-secondary" onClick={() => window.location.href = '/login'}>Login</button>
+            )}
             <div className="menu-icon" onClick={() => setIsOpen(!isOpen)}>
               {isOpen ? <X size={28} /> : <Menu size={28} />}
             </div>

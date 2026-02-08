@@ -3,51 +3,7 @@ import { Layout, Palette, Code, Layers, FileText, Server, Monitor, Globe, CheckC
 import { useNavigate } from 'react-router-dom';
 import './Domains.css';
 
-const domains = [
-  {
-    title: 'Graphic Design',
-    icon: <Palette size={28} />,
-    description: 'Design Your Logos and Create Branding, Social Media Posts, and Banners for Your Business.',
-    tags: ['Branding', 'UI/UX', 'Social Media'],
-    color: '#ec4899', // Pink
-    path: '/graphic-design'
-  },
-  {
-    title: 'FrontEnd Development',
-    icon: <Layout size={28} />,
-    description: 'We build responsive and user-friendly website interfaces.',
-    tags: ['React', 'Tailwind', 'Motion'],
-    color: '#3b82f6' // Blue
-  },
-  {
-    title: 'Full Stack Websites',
-    icon: <Layers size={28} />,
-    description: 'Built Your Own Complex Web Applications With Robust Backend Systems.',
-    tags: ['MERN', 'Next.js', 'API'],
-    color: '#8b5cf6' // Violet
-  },
-  {
-    title: 'Written Contents',
-    icon: <Globe size={28} />,
-    description: 'Neatly Written Academic Contents , Charts and Creative Works.',
-    tags: ['Personal', 'Resume', 'Blog'],
-    color: '#10b981' // Green
-  },
-  {
-    title: 'Project Desk',
-    icon: <FileText size={28} />,
-    description: 'We Provide Innovative Project Ideas, UI References, and Ready Reports and PPTs to Support Your Academic Assessments.',
-    tags: ['Docs', 'PPT', 'Reports'],
-    color: '#f59e0b' // Amber
-  },
-  {
-    title: 'Career Docs',
-    icon: <Monitor size={28} />,
-    description: 'We Create Resumes, CVs, and Cover Letters, and Optimize your LinkedIn and GitHub profiles.',
-    tags: ['Events', 'E-com', 'Landing'],
-    color: '#06b6d4' // Cyan
-  },
-];
+
 
 const DomainCard = ({ title, icon, description, tags, color, isVisible, path }) => {
   const navigate = useNavigate();
@@ -83,9 +39,26 @@ const DomainCard = ({ title, icon, description, tags, color, isVisible, path }) 
 
 const Domains = () => {
   const [isVisible, setIsVisible] = React.useState(false);
+  const [services, setServices] = React.useState([]);
   const sectionRef = React.useRef(null);
 
   React.useEffect(() => {
+    fetchServices();
+  }, []);
+
+  const fetchServices = async () => {
+    try {
+      const res = await fetch('http://localhost:5000/api/services');
+      const data = await res.json();
+      setServices(data);
+    } catch (err) {
+      console.error('Failed to fetch services');
+    }
+  };
+
+  React.useEffect(() => {
+    if (services.length === 0) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -108,7 +81,23 @@ const Domains = () => {
         observer.unobserve(sectionRef.current);
       }
     };
-  }, []);
+  }, [services]);
+
+  // Helper to map icon string to component
+  const getIcon = (iconName) => {
+    const iconProps = { size: 28 };
+    switch (iconName) {
+      case 'Palette': return <Palette {...iconProps} />;
+      case 'Layout': return <Layout {...iconProps} />;
+      case 'Layers': return <Layers {...iconProps} />;
+      case 'Globe': return <Globe {...iconProps} />;
+      case 'FileText': return <FileText {...iconProps} />;
+      case 'Monitor': return <Monitor {...iconProps} />;
+      case 'Code': return <Code {...iconProps} />;
+      case 'Server': return <Server {...iconProps} />;
+      default: return <Code {...iconProps} />;
+    }
+  };
 
   return (
     <section className="domains-section section-padding" id="domains" ref={sectionRef}>
@@ -118,8 +107,17 @@ const Domains = () => {
         </div>
 
         <div className="domains-grid">
-          {domains.map((domain, index) => (
-            <DomainCard key={index} {...domain} isVisible={isVisible} />
+          {services.map((service, index) => (
+            <DomainCard
+              key={service._id}
+              title={service.title}
+              description={service.description}
+              color={service.color}
+              icon={getIcon(service.iconName)}
+              tags={service.tags}
+              path={service.path}
+              isVisible={isVisible}
+            />
           ))}
         </div>
       </div>
