@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Mail, Heart, Share2, ZoomIn } from 'lucide-react';
 import Navbar from '../components/Navbar';
@@ -8,14 +8,47 @@ import './FreelancerPortfolio.css';
 const FreelancerPortfolioPage = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
-  const freelancer = state?.freelancer;
+  const freelancer = state?.freelancer; // freelancer object passed from navigation state
+
+  const [showcaseItems, setShowcaseItems] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+
+    const fetchShowcase = async () => {
+      if (!freelancer?.id) return;
+      try {
+        // Fetch showcase items
+        const res = await fetch(`http://localhost:5000/api/showcase?partnerId=${freelancer.id}`);
+        const data = await res.json();
+
+        if (Array.isArray(data) && data.length > 0) {
+          setShowcaseItems(data);
+        } else {
+          // Fallback to mocks if no real data found
+          setShowcaseItems(mockPortfolioItems);
+        }
+      } catch (err) {
+        console.error("Failed to fetch showcase:", err);
+        setShowcaseItems(mockPortfolioItems);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchShowcase();
+  }, [freelancer]);
+
+  // Mock portfolio items (Fallback)
+  const mockPortfolioItems = [
+    { _id: 'm1', category: 'Poster', image: 'https://images.unsplash.com/photo-1572044162444-ad602110a02e?w=800&q=80', title: 'Neon Night Festival' },
+    { _id: 'm2', category: 'Brand', image: 'https://images.unsplash.com/photo-1600607686527-6fb886090705?w=800&q=80', title: 'Eco Life Branding' },
+    { _id: 'm3', category: 'Banner', image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80', title: 'Tech Summit 2025' },
+    { _id: 'm4', category: 'Illustration', image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80', title: 'Abstract Flows' },
+  ];
 
   if (!freelancer) {
-    // Fallback if accessed directly without state
     return (
       <div className="portfolio-error">
         <h2>Freelancer not found</h2>
@@ -23,18 +56,6 @@ const FreelancerPortfolioPage = () => {
       </div>
     );
   }
-
-  // Mock portfolio items based on freelancer/general design
-  const portfolioItems = [
-    { id: 1, type: 'Poster', img: 'https://images.unsplash.com/photo-1572044162444-ad602110a02e?w=800&q=80', title: 'Neon Night Festival' },
-    { id: 2, type: 'Brand', img: 'https://images.unsplash.com/photo-1600607686527-6fb886090705?w=800&q=80', title: 'Eco Life Branding' },
-    { id: 3, type: 'Banner', img: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80', title: 'Tech Summit 2025' },
-    { id: 4, type: 'Illustration', img: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80', title: 'Abstract Flows' },
-    { id: 5, type: 'Social', img: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&q=80', title: 'Instagram Series' },
-    { id: 6, type: 'UI Design', img: 'https://images.unsplash.com/photo-1559028013-cae7ca5725e5?w=800&q=80', title: 'Finance App UI' },
-    { id: 7, type: 'Poster', img: 'https://images.unsplash.com/photo-1585250003253-24950b73af4e?w=800&q=80', title: 'Retro Music Gig' },
-    { id: 8, type: 'Print', img: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80', title: 'Magazine Cover' },
-  ];
 
   return (
     <div className="portfolio-page">
@@ -55,8 +76,8 @@ const FreelancerPortfolioPage = () => {
               <h1 className="profile-name">{freelancer.name}</h1>
               <span className="profile-role">{freelancer.role}</span>
               <p className="profile-bio">
-                Creative professional specializing in {freelancer.specialty}.
-                Turning ideas into visual reality with over 5 years of experience in the industry.
+                Creative professional specializing in {freelancer.specialty || 'Design'}.
+                Turning ideas into visual reality with over 2 years of experience in the industry.
               </p>
               <div className="profile-actions">
                 <button
@@ -78,28 +99,33 @@ const FreelancerPortfolioPage = () => {
           <h2 className="section-title">Selected <span className="text-gradient">Works</span></h2>
 
           <div className="works-masonry">
-            {portfolioItems.map((item) => (
-              <div key={item.id} className="work-item">
+            {showcaseItems.map((item) => (
+              <div key={item._id} className="work-item">
                 <div className="work-image-wrapper">
-                  <img src={item.img} alt={item.title} loading="lazy" />
+                  <img src={item.image} alt={item.title} loading="lazy" />
                   <div className="work-overlay">
                     <div className="overlay-content">
                       <h3>{item.title}</h3>
-                      <p>{item.type}</p>
-                      <button className="zoom-btn"><ZoomIn size={24} /></button>
+                      <p>{item.category}</p>
+                      {item.link && (
+                        <a href={item.link} target="_blank" rel="noreferrer" style={{ color: 'white', marginTop: '0.5rem', display: 'inline-block' }}>
+                          View Project &rarr;
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>
-                <div className="work-details">
-                  <div className="work-likes">
-                    <Heart size={16} /> <span>{Math.floor(Math.random() * 200) + 50}</span>
+                {item.description && (
+                  <div className="work-details" style={{ padding: '0.5rem', fontSize: '0.9rem', color: '#666' }}>
+                    {item.description.substring(0, 60)}...
                   </div>
-                </div>
+                )}
               </div>
             ))}
           </div>
         </section>
       </div>
+
 
       <Footer />
     </div>

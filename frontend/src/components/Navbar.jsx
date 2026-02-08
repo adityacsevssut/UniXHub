@@ -1,52 +1,85 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, Rocket, Search } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Menu, X, Rocket, Search, LogOut } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [user, setUser] = useState(null);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const profileRef = useRef(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
+    const savedUser = localStorage.getItem('user');
+    if (savedUser) setUser(JSON.parse(savedUser));
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    setUser(null);
+    navigate('/login');
+  };
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (profileRef.current && !profileRef.current.contains(e.target)) {
+        setProfileOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   return (
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="nav-container">
-        <div className="logo" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
-          <span className="logo-text">UniX<span className="text-highlight">Hub</span></span>
+        <div className="logo" onClick={() => navigate('/')}>
+          UniXHub
         </div>
 
-        <div className="nav-group">
-          <div className={`nav-links ${isOpen ? 'active' : ''}`}>
-            <a href="/" className="nav-link" onClick={(e) => { e.preventDefault(); navigate('/'); setIsOpen(false); }}>Home</a>
-            <a href="/domains" className="nav-link" onClick={(e) => { e.preventDefault(); navigate('/domains'); setIsOpen(false); }}>Get Services</a>
-            <a href="/features" className="nav-link" onClick={(e) => { e.preventDefault(); navigate('/features'); setIsOpen(false); }}>Features</a>
-            <a href="/about" className="nav-link" onClick={(e) => { e.preventDefault(); navigate('/about'); setIsOpen(false); }}>About</a>
-            {/* Mobile Actions if needed */}
-          </div>
+        <div className={`nav-links ${isOpen ? 'active' : ''}`}>
+          <a onClick={() => navigate('/')}>Home</a>
+          <a onClick={() => navigate('/domains')}>Get Services</a>
+          <a onClick={() => navigate('/features')}>Features</a>
+          <a onClick={() => navigate('/about')}>About</a>
+        </div>
 
-          <div className="search-bar-container">
-            <input type="text" placeholder="Search services..." className="search-input" />
-            <Search className="search-icon" size={18} />
-          </div>
+        <div className="search-bar-container">
+          <input placeholder="Search services..." />
+          <Search size={18} />
+        </div>
 
-          <div className="nav-actions">
-            <div className="nav-actions">
-              <button className="btn-secondary">Login</button>
-              <div className="menu-icon" onClick={() => setIsOpen(!isOpen)}>
-                {isOpen ? <X size={28} /> : <Menu size={28} />}
+        <div className="nav-actions">
+          {user ? (
+            <div ref={profileRef}>
+              <div onClick={() => setProfileOpen(!profileOpen)}>
+                {user.name?.charAt(0) || 'U'}
               </div>
-            </div>
 
-            <div className="menu-icon" onClick={() => setIsOpen(!isOpen)}>
-              {isOpen ? <X size={28} /> : <Menu size={28} />}
+              {profileOpen && (
+                <div>
+                  <p>{user.email}</p>
+                  <button onClick={handleLogout}>
+                    <LogOut size={16} /> Logout
+                  </button>
+                </div>
+              )}
             </div>
+          ) : (
+            <button onClick={() => navigate('/login')}>Login</button>
+          )}
+
+          <div onClick={() => setIsOpen(!isOpen)}>
+            {isOpen ? <X /> : <Menu />}
           </div>
         </div>
       </div>
