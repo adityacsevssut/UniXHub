@@ -3,7 +3,51 @@ import { Layout, Palette, Code, Layers, FileText, Server, Monitor, Globe, CheckC
 import { useNavigate } from 'react-router-dom';
 import './Domains.css';
 
-
+const domains = [
+  {
+    title: 'Graphic Design',
+    icon: <Palette size={28} />,
+    description: 'Design Your Logos and Create Branding, Social Media Posts, and Banners for Your Business.',
+    tags: ['Branding', 'UI/UX', 'Social Media'],
+    color: '#ec4899', // Pink
+    path: '/graphic-design'
+  },
+  {
+    title: 'FrontEnd Development',
+    icon: <Layout size={28} />,
+    description: 'We build responsive and user-friendly website interfaces.',
+    tags: ['React', 'Tailwind', 'Motion'],
+    color: '#3b82f6' // Blue
+  },
+  {
+    title: 'Full Stack Websites',
+    icon: <Layers size={28} />,
+    description: 'Built Your Own Complex Web Applications With Robust Backend Systems.',
+    tags: ['MERN', 'Next.js', 'API'],
+    color: '#8b5cf6' // Violet
+  },
+  {
+    title: 'Written Contents',
+    icon: <Globe size={28} />,
+    description: 'Neatly Written Academic Contents , Charts and Creative Works.',
+    tags: ['Personal', 'Resume', 'Blog'],
+    color: '#10b981' // Green
+  },
+  {
+    title: 'Project Desk',
+    icon: <FileText size={28} />,
+    description: 'We Provide Innovative Project Ideas, UI References, and Ready Reports and PPTs to Support Your Academic Assessments.',
+    tags: ['Docs', 'PPT', 'Reports'],
+    color: '#f59e0b' // Amber
+  },
+  {
+    title: 'Career Docs',
+    icon: <Monitor size={28} />,
+    description: 'We Create Resumes, CVs, and Cover Letters, and Optimize your LinkedIn and GitHub profiles.',
+    tags: ['Events', 'E-com', 'Landing'],
+    color: '#06b6d4' // Cyan
+  },
+];
 
 const DomainCard = ({ title, icon, description, tags, color, isVisible, path }) => {
   const navigate = useNavigate();
