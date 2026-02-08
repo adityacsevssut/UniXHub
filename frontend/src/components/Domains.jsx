@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Palette, Code, Layers, FileText, Server, Monitor, Globe, CheckCircle, ArrowUpRight } from 'lucide-react';
+import { Layout, Palette, Code, Layers, FileText, Server, Monitor, Globe, CheckCircle, ArrowUpRight, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import './Domains.css';
 
@@ -73,7 +73,9 @@ const DomainCard = ({ title, icon, description, tags, color, isVisible, path }) 
       <h3 className="domain-card-title-default">{title}</h3>
 
       {/* Hover State: Top Right Overlay (Background effect) */}
-      <div className="domain-card-overlay-top"></div>
+      <div className="domain-card-overlay-top">
+        <ArrowRight size={24} color={color} />
+      </div>
 
       {/* Hover State: Bottom Left Overlay (Content holder) */}
       <div className="domain-card-overlay-bottom">
