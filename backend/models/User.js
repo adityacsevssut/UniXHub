@@ -34,6 +34,30 @@ const userSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    firebaseUid: {
+      type: String,
+      required: false,
+    },
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
+    otp: {
+      type: String,
+    },
+    otpExpires: {
+      type: Date,
+    },
+    resetPasswordOtp: {
+      type: String,
+    },
+    resetPasswordOtpExpires: {
+      type: Date,
+    },
+    resetPasswordOtpVerified: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,
@@ -41,9 +65,9 @@ const userSchema = mongoose.Schema(
 );
 
 // Encrypt password using bcrypt
-userSchema.pre('save', async function (next) {
+userSchema.pre('save', async function () {
   if (!this.isModified('password')) {
-    next();
+    return;
   }
 
   const salt = await bcrypt.genSalt(10);

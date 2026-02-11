@@ -23,37 +23,43 @@ import LoginOptions from './pages/Auth/LoginOptions';
 import PartnerLoginPage from './pages/Auth/PartnerLoginPage';
 import DeveloperLoginPage from './pages/Auth/DeveloperLoginPage';
 import SignupPage from './pages/Auth/SignupPage';
+import ForgotPasswordPage from './pages/Auth/ForgotPasswordPage';
+import { ToastProvider } from './context/ToastContext';
+import './styles/Toast.css';
 
 function App() {
   return (
-    <div className="app">
-      <div className="grid-bg"></div>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/support" element={<Support />} />
-          <Route path="/features" element={<FeaturesPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/domains" element={<DomainsPage />} />
-          <Route path="/graphic-design" element={<GraphicDesignPage />} />
-          <Route path="/freelancers" element={<FreelancersPage />} />
-          <Route path="/portfolio" element={<FreelancerPortfolioPage />} />
-          <Route path="/chat" element={<ChatPage />} />
-          <Route path="/templates" element={<TemplatesPage />} />
-          <Route path="/admin/graphic-design" element={<GraphicDesignAdmin />} />
-          <Route path="/admin/dashboard" element={<DeveloperDashboard />} />
-          <Route path="/admin/partners" element={<PartnerManagement />} />
-          <Route path="/feedback" element={<FeedbackPage />} />
-          <Route path="/login" element={<LoginOptions />} />
-          <Route path="/user-login" element={<LoginPage />} />
-          <Route path="/partner-login" element={<PartnerLoginPage />} />
-          <Route path="/partner/dashboard" element={<PartnerDashboard />} />
-          <Route path="/partner/graphic-design" element={<PartnerGraphicDesignManager />} />
-          <Route path="/developer-login" element={<DeveloperLoginPage />} />
-          <Route path="/register" element={<SignupPage />} />
-        </Routes>
-      </Router>
-    </div>
+    <ToastProvider>
+      <div className="app">
+        <div className="grid-bg"></div>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/support" element={<Support />} />
+            <Route path="/features" element={<FeaturesPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/domains" element={<DomainsPage />} />
+            <Route path="/graphic-design" element={<GraphicDesignPage />} />
+            <Route path="/freelancers" element={<FreelancersPage />} />
+            <Route path="/portfolio" element={<FreelancerPortfolioPage />} />
+            <Route path="/chat" element={<ChatPage />} />
+            <Route path="/templates" element={<TemplatesPage />} />
+            <Route path="/admin/graphic-design" element={<GraphicDesignAdmin />} />
+            <Route path="/admin/dashboard" element={<DeveloperDashboard />} />
+            <Route path="/admin/partners" element={<PartnerManagement />} />
+            <Route path="/feedback" element={<FeedbackPage />} />
+            <Route path="/login" element={<LoginOptions />} />
+            <Route path="/user-login" element={<LoginPage />} />
+            <Route path="/partner-login" element={<PartnerLoginPage />} />
+            <Route path="/partner/dashboard" element={<PartnerDashboard />} />
+            <Route path="/partner/graphic-design" element={<PartnerGraphicDesignManager />} />
+            <Route path="/developer-login" element={<DeveloperLoginPage />} />
+            <Route path="/register" element={<SignupPage />} />
+            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          </Routes>
+        </Router>
+      </div>
+    </ToastProvider>
   );
 }
 
