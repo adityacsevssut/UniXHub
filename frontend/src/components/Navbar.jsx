@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, Rocket, Search, LogOut } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useToast } from '../context/ToastContext';
 import './Navbar.css';
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { showToast } = useToast();
 
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -20,7 +22,8 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem('user');
     setUser(null);
-    navigate('/login');
+    showToast('Logged out successfully', 'info');
+    setTimeout(() => navigate('/login'), 500);
   };
 
   useEffect(() => {
@@ -51,6 +54,20 @@ const Navbar = () => {
           <a onClick={() => navigate('/domains')}>Get Services</a>
           <a onClick={() => navigate('/features')}>Features</a>
           <a onClick={() => navigate('/about')}>About</a>
+
+          <div className="mobile-auth-links">
+            {user ? (
+              <>
+                <div className="mobile-profile-info">
+                  <div className="mobile-user-avatar">{user.name?.charAt(0).toUpperCase()}</div>
+                  <span>{user.name}</span>
+                </div>
+                <a onClick={handleLogout} className="mobile-logout">Logout</a>
+              </>
+            ) : (
+              <a onClick={() => navigate('/login')} className="mobile-login-btn">Login / Sign Up</a>
+            )}
+          </div>
         </div>
 
         <div className="nav-right-group">

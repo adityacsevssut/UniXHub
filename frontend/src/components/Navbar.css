@@ -271,11 +271,85 @@
 .menu-icon {
   display: none;
   cursor: pointer;
-  color: #1e293b;
+  color: var(--primary);
+  width: 40px;
+  height: 40px;
+  /* Flex properties reserved for mobile media query */
+  align-items: center;
+  justify-content: center;
+  background: rgba(79, 70, 229, 0.1);
+  border: 1px solid rgba(79, 70, 229, 0.2);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.menu-icon:hover {
+  background: var(--primary);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+/* Mobile Auth Links (Hidden on Desktop) */
+.mobile-auth-links {
+  display: none;
 }
 
 /* MOBILE RESPONSIVE */
 @media (max-width: 1024px) {
+  .mobile-auth-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    width: 100%;
+    border-top: 1px solid rgba(0,0,0,0.05);
+    padding-top: 2rem;
+  }
+
+  .mobile-profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    color: #1e293b;
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+  
+  .mobile-user-avatar {
+    width: 64px;
+    height: 64px;
+    background: var(--gradient-main);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.25);
+    border: 3px solid white;
+  }
+
+  .mobile-logout {
+    color: #ef4444 !important;
+    font-weight: 600;
+    font-size: 1rem !important;
+    margin-top: 0.5rem;
+  }
+
+  .mobile-login-btn {
+    background: var(--gradient-main); /* Use your gradient variable */
+    background-image: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); /* Fallback */
+    color: white !important;
+    padding: 0.8rem 2.5rem;
+    border-radius: 50px;
+    font-size: 1.1rem !important;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+    font-weight: 600 !important;
+  }
+
   .nav-links {
     /* Reset absolute positioning on smaller screens where overlap might occur */
     position: fixed;
@@ -306,7 +380,7 @@
   }
 
   .menu-icon {
-    display: block;
+    display: flex; /* Changed from block to flex to maintain centering */
     z-index: 1001;
   }
 

@@ -287,12 +287,13 @@
 }
 
 .social-login {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .social-btn {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -397,6 +398,36 @@
 .auth-link:hover {
   color: var(--secondary-color);
   text-decoration: underline;
+}
+
+/* Resend OTP Button Style */
+.resend-otp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1));
+  border: 1.5px solid rgba(139, 92, 246, 0.3);
+  border-radius: 10px;
+  color: #8b5cf6;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 4px 8px rgba(139, 92, 246, 0.15);
+}
+
+.resend-otp-btn:hover {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2));
+  border-color: #8b5cf6;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(139, 92, 246, 0.3);
+}
+
+.resend-otp-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(139, 92, 246, 0.2);
 }
 
 .error-message {
