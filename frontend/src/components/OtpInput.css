@@ -1,0 +1,120 @@
+/* OTP Input Component Styles */
+.otp-input-container {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem auto;
+  width: 100%;
+  max-width: 320px; /* Tighter container to keep boxes closer */
+}
+
+.otp-input-box {
+  width: 36px;
+  height: 40px;
+  flex: 0 1 36px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #1e293b !important;
+  caret-color: #8b5cf6;
+  outline: none;
+  transition: all 0.2s ease;
+  font-family: 'Inter', monospace;
+  -webkit-text-fill-color: #1e293b;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  padding: 0;
+}
+
+.otp-input-box:focus {
+  border-color: #8b5cf6;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+  transform: translateY(-2px);
+  color: #1e293b !important;
+  -webkit-text-fill-color: #1e293b;
+}
+
+.otp-input-box:not(:placeholder-shown) {
+  border-color: #8b5cf6;
+  background: rgba(139, 92, 246, 0.05);
+  color: #1e293b !important;
+  -webkit-text-fill-color: #1e293b;
+}
+
+/* Hover effect */
+.otp-input-box:hover {
+  border-color: #a78bfa;
+}
+
+/* Tablet and Mobile */
+@media (max-width: 640px) {
+  .otp-input-container {
+    gap: 6px;
+    max-width: 280px; /* Even tighter for mobile */
+  }
+
+  .otp-input-box {
+    width: 34px;
+    height: 38px;
+    flex: 0 1 34px;
+    font-size: 0.95rem;
+  }
+}
+
+/* Mobile Single Input View */
+.otp-input-container.mobile-view {
+  display: block;
+  width: 100%;
+  max-width: 320px; /* Consistent width */
+  margin: 1rem auto;
+}
+
+.otp-mobile-input {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.5rem; /* Large text */
+  letter-spacing: 0.8rem; /* Space out numbers clearly */
+  text-align: center;
+  font-weight: 700;
+  color: #1e293b;
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid #cbd5e1;
+  border-radius: 12px;
+  outline: none;
+  transition: all 0.3s ease;
+  font-family: 'Inter', monospace;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.otp-mobile-input::placeholder {
+  letter-spacing: normal;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #94a3b8;
+  opacity: 0.7;
+}
+
+.otp-mobile-input:focus {
+  border-color: #8b5cf6;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Small Mobile (iPhone SE/Fold etc) */
+@media (max-width: 380px) {
+  .otp-input-container {
+    gap: 4px; /* Minimal gap */
+  }
+
+  .otp-input-box {
+    max-width: 34px;
+    height: 40px;
+    font-size: 0.95rem;
+    border-radius: 6px;
+  }
+}
