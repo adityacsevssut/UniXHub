@@ -5,6 +5,7 @@ import * as LucideIcons from 'lucide-react';
 import './GraphicDesignPage.css';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import LoadingOverlay from '../components/LoadingOverlay';
 
 // Helper to get icon with props (Dynamic for both Lucide and URL)
 const getIcon = (item, size) => {
@@ -48,6 +49,7 @@ const GraphicDesignPage = () => {
 
   return (
     <div className="gd-page">
+      <LoadingOverlay loading={loading} text="Loading Design Hub..." />
       <Navbar />
       <div className="gd-container">
         {/* Header Section */}
@@ -63,7 +65,7 @@ const GraphicDesignPage = () => {
 
         {/* Quick Actions Grid */}
         <section className="gd-actions-grid">
-          {loading ? <p>Loading options...</p> : quickActions.map((opt, index) => (
+          {!loading && quickActions.map((opt, index) => (
             <div
               key={opt._id || index}
               className="gd-action-card glass-card"
@@ -85,7 +87,7 @@ const GraphicDesignPage = () => {
         <section className="gd-services-section">
           <h2 className="section-title">Design <span className="text-gradient">Services</span></h2>
           <div className="gd-services-list">
-            {loading ? <p>Loading services...</p> : services.map((service, index) => (
+            {!loading && services.map((service, index) => (
               <div key={service._id || index} className="gd-service-item glass-panel">
                 <div className="service-icon">{getIcon(service, 24)}</div>
                 <div className="service-info">

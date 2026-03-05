@@ -7,6 +7,7 @@ import { auth } from '../../firebase';
 import { signInWithEmailAndPassword, sendEmailVerification, signOut, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useToast } from '../../context/ToastContext';
 import './Auth.css';
+import LoadingOverlay from '../../components/LoadingOverlay';
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -36,7 +37,7 @@ const LoginPage = () => {
 
       /* Firebase login attempt removed. We only auth via backend now. */
 
-      /* Removed Firebase emailVerified check since we use backend OTP now */
+      /* Removed Firebase emailVerified check since we use backend OTP now. */
 
       const res = await fetch('http://localhost:5000/api/auth/login', {
         method: 'POST',
@@ -189,6 +190,7 @@ const LoginPage = () => {
 
   return (
     <div className="auth-page">
+      <LoadingOverlay loading={loading} text="Signing you in..." />
       <Navbar />
       <div className="auth-card">
         <header className="auth-header">
