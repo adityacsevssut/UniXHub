@@ -26,10 +26,10 @@ const Footer = () => {
             Helping students and businesses build, grow, and succeed in the digital world.
           </p>
           <div className="social-icons-row">
-            <a href="#" className="social-icon" aria-label="Twitter"><Twitter size={18} /></a>
-            <a href="#" className="social-icon" aria-label="LinkedIn"><Linkedin size={18} /></a>
-            <a href="#" className="social-icon" aria-label="Instagram"><Instagram size={18} /></a>
-            <a href="#" className="social-icon" aria-label="GitHub"><Github size={18} /></a>
+            <a href="#" className="social-icon-btn" aria-label="Twitter"><Twitter size={24} /></a>
+            <a href="#" className="social-icon-btn" aria-label="LinkedIn"><Linkedin size={24} /></a>
+            <a href="#" className="social-icon-btn" aria-label="Instagram"><Instagram size={24} /></a>
+            <a href="#" className="social-icon-btn" aria-label="GitHub"><Github size={24} /></a>
           </div>
         </div>
 

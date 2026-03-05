@@ -89,12 +89,12 @@
 /* Social Icons */
 .social-icons-row {
   display: flex;
-  gap: 1rem;
+  gap: 0.8rem;
 }
 
-.social-icon {
-  width: 42px;
-  height: 42px;
+.social-icon-btn {
+  width: 44px;
+  height: 44px;
   border-radius: 12px; /* Soft square looks more modern */
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -105,7 +105,12 @@
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.social-icon:hover {
+.social-icon-btn svg {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.social-icon-btn:hover {
   background: white;
   color: var(--primary);
   border-color: white;
@@ -235,6 +240,7 @@
 
 .input-group input {
   flex: 1;
+  min-width: 0; /* Critical for flex shrinking */
   background: transparent;
   border: none;
   outline: none;
@@ -339,6 +345,15 @@
   
   .back-to-top {
     width: 100%;
+    width: 100%;
     justify-content: center;
+  }
+
+  .newsletter-col {
+    padding: 1.5rem 1rem;
+  }
+
+  .footer-heading {
+    font-size: 1.25rem;
   }
 }

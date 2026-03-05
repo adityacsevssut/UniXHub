@@ -24,6 +24,7 @@ import PartnerLoginPage from './pages/Auth/PartnerLoginPage';
 import DeveloperLoginPage from './pages/Auth/DeveloperLoginPage';
 import SignupPage from './pages/Auth/SignupPage';
 import ForgotPasswordPage from './pages/Auth/ForgotPasswordPage';
+import NotFoundPage from './pages/NotFoundPage';
 import { ToastProvider } from './context/ToastContext';
 import './styles/Toast.css';
 
@@ -56,6 +57,7 @@ function App() {
             <Route path="/developer-login" element={<DeveloperLoginPage />} />
             <Route path="/register" element={<SignupPage />} />
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Router>
       </div>

@@ -369,4 +369,35 @@
     align-items: flex-start; /* List looks better left aligned usually, but centered is okay if requested */
     align-items: center;
   }
+
+  /* Mobile Header Adjustments */
+  .about-header {
+    height: auto;
+    min-height: auto;
+    padding-bottom: 4rem;
+  }
+  
+  .about-main-title {
+    font-size: 2.5rem;
+    line-height: 1.1;
+  }
+
+  .about-subtitle {
+     font-size: 1rem;
+     padding: 0 1rem;
+  }
+
+  .about-header-content {
+    padding-top: 6rem;
+  }
+
+  .about-stats-row {
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+
+  .glass-stat {
+    min-width: 45%;
+    padding: 1rem;
+  }
 }
