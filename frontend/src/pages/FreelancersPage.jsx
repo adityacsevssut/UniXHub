@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, Mail, Send } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import LoadingOverlay from '../components/LoadingOverlay';
 
 // Define Styled Components FIRST to prevent ReferenceErrors
 
@@ -463,6 +464,7 @@ const FreelancersPage = () => {
 
   return (
     <PageWrapper>
+      <LoadingOverlay loading={loading} text="Finding experts for you..." />
       <Navbar />
       <div className="container" style={{ paddingTop: '100px', paddingBottom: '4rem' }}>
         <Header>
@@ -473,50 +475,49 @@ const FreelancersPage = () => {
           <Subtitle>Expert designers ready to bring your vision to life</Subtitle>
         </Header>
 
-        {loading ? (
-          <p style={{ textAlign: 'center', fontSize: '1.2rem', color: '#64748b' }}>Loading experts...</p>
-        ) : freelancers.length > 0 ? (
-          <Grid>
-            {freelancers.map((freelancer) => (
-              <CardWrapper key={freelancer.id}>
-                <div className="book">
-                  <div className="back-content">
-                    <h4>{freelancer.specialty}</h4>
-                    <div className="actions">
-                      <button
-                        className="action-btn work-btn"
-                        onClick={() => navigate('/portfolio', { state: { freelancer } })}
-                      >
-                        <ExternalLink size={16} /> View Work
-                      </button>
-                      <button
-                        className="action-btn contact-btn"
-                        onClick={() => navigate('/chat', { state: { freelancer } })}
-                      >
-                        <Mail size={16} /> Contact Now
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className="cover">
-                    <div className="cover-content">
-                      <div className="img-container">
-                        <img src={freelancer.image} alt={freelancer.name} />
+        {!loading && (
+          freelancers.length > 0 ? (
+            <Grid>
+              {freelancers.map((freelancer) => (
+                <CardWrapper key={freelancer.id}>
+                  <div className="book">
+                    <div className="back-content">
+                      <h4>{freelancer.specialty}</h4>
+                      <div className="actions">
+                        <button
+                          className="action-btn work-btn"
+                          onClick={() => navigate('/portfolio', { state: { freelancer } })}
+                        >
+                          <ExternalLink size={16} /> View Work
+                        </button>
+                        <button
+                          className="action-btn contact-btn"
+                          onClick={() => navigate('/chat', { state: { freelancer } })}
+                        >
+                          <Mail size={16} /> Contact Now
+                        </button>
                       </div>
-                      <h3>{freelancer.name}</h3>
-                      <span className="role">{freelancer.role}</span>
+                    </div>
+
+                    <div className="cover">
+                      <div className="cover-content">
+                        <div className="img-container">
+                          <img src={freelancer.image} alt={freelancer.name} />
+                        </div>
+                        <h3>{freelancer.name}</h3>
+                        <span className="role">{freelancer.role}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </CardWrapper>
-            ))}
-          </Grid>
-        ) : (
-          <div style={{ textAlign: 'center', padding: '4rem', color: '#64748b' }}>
-            <h3>No partners available for this service yet.</h3>
-            <p>Check back soon!</p>
-          </div>
-        )}
+                </CardWrapper>
+              ))}
+            </Grid>
+          ) : (
+            <div style={{ textAlign: 'center', padding: '4rem', color: '#64748b' }}>
+              <h3>No partners available for this service yet.</h3>
+              <p>Check back soon!</p>
+            </div>
+          ))}
 
         {/* Contact Modal */}
         {isModalOpen && selectedFreelancer && (

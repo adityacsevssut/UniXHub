@@ -31,20 +31,19 @@
 }
 
 /* Form Card Styling - Neumorphic (Matches Support Form) */
+/* Form Card Styling - Neumorphic Updated */
 .auth-card {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 24px;
+  background: #F8F9FD;
+  background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(244, 247, 251) 100%);
+  border: 5px solid rgb(255, 255, 255);
+  border-radius: 40px;
   padding: 3rem;
   width: 100%;
-  max-width: 480px;
-  box-shadow: 
-    0 20px 40px -10px rgba(0, 0, 0, 0.1),
-    0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+  max-width: 450px; /* Slightly tighter width like user example */
+  box-shadow: 0 30px 40px -20px rgba(99, 102, 241, 0.25); /* Indigo shadow */
   animation: slideUp 0.5s ease-out;
   position: relative;
+  margin: 10px;
 }
 
 .auth-card:hover {
@@ -60,27 +59,27 @@
 .icon-wrapper {
   width: 60px;
   height: 60px;
-  border-radius: 18px;
+  border-radius: 50%; /* Circular icon wrapper */
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 1rem auto;
-  background: rgba(79, 70, 229, 0.05); /* Indigo tint */
-  border: 1px solid rgba(79, 70, 229, 0.1);
+  background: rgba(79, 70, 229, 0.1); 
+  border: 1px solid rgba(79, 70, 229, 0.1); /* Subtle border */
   color: var(--primary-color);
 }
 
 .auth-header h1 {
   font-family: 'Outfit', sans-serif;
-  font-size: 1.8rem;
-  font-weight: 800;
-  color: #1e293b;
+  font-size: 2rem;
+  font-weight: 900; /* Bolder heading */
+  color: #4f46e5; /* Indigo */
   margin-bottom: 0.5rem;
 }
 
 .auth-header p {
   color: var(--text-muted);
-  font-size: 1rem;
+  font-size: 0.95rem;
   line-height: 1.5;
 }
 
@@ -97,49 +96,51 @@
 }
 
 .form-group label {
-  display: block;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #475569;
-  margin-bottom: 0.4rem;
-  margin-left: 4px;
+  display: none; /* Hide labels to match user style preference? Or keep small? User style hid labels. I'll keep generic small label support if needed but default hide */
+  /* Actually, removing labels abruptly might hurt UX. Let's inspect user code: placeholders only. 
+     I'll set display: block but maybe visualy consistent? No, user explicitly said "look like This". "This" has no labels.
+     I will hide labels for now. */
+  display: none; 
 }
 
 .input-wrapper {
   position: relative;
 }
 
-/* Input Styling (Matches Support Form) */
+/* Input Styling */
 .auth-input {
   width: 100%;
-  padding: 0.9rem 1rem 0.9rem 2.8rem; /* Space for icon */
+  padding: 15px 20px 15px 45px; /* Pill padding + Icon space */
   outline: none;
-  border: 1px solid #cbd5e1;
-  font-size: 0.95rem;
-  background: rgba(255, 255, 255, 0.6);
+  border: none; /* No border initially */
+  border-inline: 2px solid transparent;
+  font-size: 1rem;
+  background: white;
   color: #0f172a;
-  border-radius: 12px;
-  box-shadow: none;
+  border-radius: 20px; /* Pill shape */
+  box-shadow: 0 10px 10px -5px rgba(224, 231, 255, 1); /* Indigo tint shadow */
   font-family: inherit;
   transition: all 0.3s ease;
 }
 
 .auth-input:focus {
-  border-color: var(--primary-color);
+  border-color: transparent;
+  border-inline: 2px solid var(--primary-color);
   background: white;
-  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1); /* Optional focus ring/shadow */
 }
 
 .input-icon {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  left: 14px;
+  left: 20px; /* Adjust for new padding */
   color: #94a3b8;
   pointer-events: none;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   transition: color 0.3s ease;
+  z-index: 10;
 }
 
 .auth-input:focus + .input-icon {
@@ -155,7 +156,7 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  right: 14px;
+  right: 20px; /* Adjust right padding */
   background: none;
   border: none;
   color: #94a3b8;
@@ -187,6 +188,7 @@
   align-items: center;
   font-size: 0.9rem;
   margin-top: -0.25rem;
+  padding: 0 10px; /* Indent slightly */
 }
 
 .remember-me {
@@ -218,20 +220,20 @@
   text-decoration: underline;
 }
 
-/* Submit Button (Matches Support Form) */
+/* Submit Button */
 .auth-btn {
   width: 100%;
-  margin-top: 0.5rem;
-  padding: 0.9rem;
+  margin-top: 1rem;
+  padding: 15px;
   font-size: 1rem;
-  font-weight: 600;
-  background: linear-gradient(135deg, #4f46e5, #8b5cf6);
-  border-radius: 12px;
+  font-weight: 700;
+  background: linear-gradient(45deg, #4f46e5 0%, #6366f1 100%);
+  border-radius: 20px;
   border: none;
   outline: none;
   cursor: pointer;
   color: white;
-  box-shadow: 0 10px 20px rgba(79, 70, 229, 0.25);
+  box-shadow: 0 20px 10px -15px rgba(99, 102, 241, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -240,12 +242,13 @@
 }
 
 .auth-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 15px 30px rgba(79, 70, 229, 0.4);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 23px 10px -20px rgba(99, 102, 241, 0.4);
 }
 
 .auth-btn:active {
-  transform: translateY(0);
+  transform: scale(0.95);
+  box-shadow: 0 15px 10px -10px rgba(99, 102, 241, 0.3);
 }
 
 .auth-btn:disabled {

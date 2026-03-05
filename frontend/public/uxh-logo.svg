@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <linearGradient id="purpleGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#9333ea" />
+      <stop offset="100%" stop-color="#4f46e5" />
+    </linearGradient>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@800&amp;display=swap');
+    </style>
+  </defs>
+  <rect width="120" height="120" rx="24" fill="white" />
+  <text y="58%" font-family="'Outfit', sans-serif" font-weight="800" font-size="72" dominant-baseline="middle">
+    <tspan x="36" text-anchor="middle" fill="#000000">U</tspan>
+    <tspan x="62" text-anchor="middle" fill="#000000">X</tspan>
+    <tspan x="88" text-anchor="middle" fill="url(#purpleGradient)">H</tspan>
+  </text>
+</svg>

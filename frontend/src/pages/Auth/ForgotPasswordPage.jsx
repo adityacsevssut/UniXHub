@@ -4,6 +4,7 @@ import { Mail, Lock, Eye, EyeOff, KeyRound, ArrowLeft } from 'lucide-react';
 import Navbar from '../../components/Navbar';
 import { useToast } from '../../context/ToastContext';
 import OtpInput from '../../components/OtpInput';
+import LoadingOverlay from '../../components/LoadingOverlay';
 import './Auth.css';
 
 const ForgotPasswordPage = () => {
@@ -161,6 +162,7 @@ const ForgotPasswordPage = () => {
 
   return (
     <div className="auth-page">
+      <LoadingOverlay loading={loading} text="Processing..." />
       <Navbar />
       <div className="auth-card">
         <header className="auth-header">

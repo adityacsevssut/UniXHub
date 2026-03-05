@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Mail, Lock, Eye, EyeOff, User, Briefcase, Building2, Globe, ArrowLeft } from 'lucide-react';
 import Navbar from '../../components/Navbar';
+import LoadingOverlay from '../../components/LoadingOverlay';
 import './Auth.css';
 
 const PartnerLoginPage = () => {
@@ -51,6 +52,7 @@ const PartnerLoginPage = () => {
 
   return (
     <div className="auth-page">
+      <LoadingOverlay loading={loading} text="Partner Access..." />
       <Navbar />
       <div className="auth-card">
         <header className="auth-header">

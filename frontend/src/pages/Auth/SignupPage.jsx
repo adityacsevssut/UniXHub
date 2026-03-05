@@ -6,6 +6,7 @@ import { auth } from '../../firebase'; // Import firebase auth
 import { createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'; // Import firebase functions
 import { useToast } from '../../context/ToastContext';
 import OtpInput from '../../components/OtpInput';
+import LoadingOverlay from '../../components/LoadingOverlay';
 import './Auth.css';
 
 const SignupPage = () => {
@@ -266,6 +267,7 @@ const SignupPage = () => {
   if (verificationSent) {
     return (
       <div className="auth-page">
+        <LoadingOverlay loading={loading} text="Processing request..." />
         <Navbar />
         <div className="auth-card" style={{ textAlign: 'center', padding: '3rem' }}>
           <div className="icon-wrapper" style={{ margin: '0 auto 1.5rem', background: 'rgba(16, 185, 129, 0.1)', color: '#10b981', borderColor: '#10b981' }}>
@@ -302,6 +304,7 @@ const SignupPage = () => {
 
   return (
     <div className="auth-page">
+      <LoadingOverlay loading={loading} text="Processing request..." />
       <Navbar />
       <div className="auth-card" style={{ maxWidth: '600px' }}> {/* Wider card for signup */}
         <header className="auth-header">

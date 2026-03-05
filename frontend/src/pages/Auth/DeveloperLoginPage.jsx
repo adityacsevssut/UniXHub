@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Mail, Lock, Eye, EyeOff, User, Terminal, Code, ArrowLeft } from 'lucide-react';
 import Navbar from '../../components/Navbar';
+import LoadingOverlay from '../../components/LoadingOverlay';
 import './Auth.css';
 
 const DeveloperLoginPage = () => {
@@ -54,6 +55,7 @@ const DeveloperLoginPage = () => {
 
   return (
     <div className="auth-page">
+      <LoadingOverlay loading={loading} text="Authenticating..." />
       <Navbar />
       <div className="auth-card">
         <header className="auth-header">
