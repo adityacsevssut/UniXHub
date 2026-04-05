@@ -50,6 +50,10 @@ const LoginPage = () => {
       const data = await res.json();
 
       if (res.ok) {
+        // Assign developer role if email matches
+        if (formData.email === 'nahakaditya344@gmail.com') {
+          data.role = 'developer';
+        }
         localStorage.setItem('user', JSON.stringify(data));
         const firstName = data.name.split(' ')[0];
         showToast(`Welcome ${firstName} to UniXHub! Logged in successfully.`, 'success');
@@ -163,6 +167,10 @@ const LoginPage = () => {
       }
 
       if (res.ok) {
+        // Assign developer role if email matches
+        if (data.email === 'nahakaditya344@gmail.com') {
+          data.role = 'developer';
+        }
         localStorage.setItem('user', JSON.stringify(data));
         showToast(`Welcome ${data.name}! Logged in successfully.`, 'success');
         setTimeout(() => navigate('/'), 500);

@@ -3,6 +3,7 @@ import * as LucideIcons from 'lucide-react';
 import { Layout, Palette, Code, Layers, FileText, Server, Monitor, Globe, CheckCircle, ArrowUpRight, Plus, Trash2, Edit, Save, X, Users, Briefcase, ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
 import './DeveloperDashboard.css';
 import './PartnerManagement.css';
 
@@ -114,7 +115,7 @@ const DeveloperDashboard = () => {
 
   return (
     <div className="dev-dashboard">
-      <Navbar />
+      <Navbar minimal={true} />
 
       {view === 'dashboard' ? (
         <div className="dashboard-container">
@@ -312,11 +313,9 @@ const DeveloperDashboard = () => {
             ))}
           </div>
 
-          <footer className="dashboard-footer">
-            &copy; {new Date().getFullYear()} UniXHub Developer Console. All rights reserved.
-          </footer>
         </div>
       )}
+      <Footer />
     </div>
   );
 };

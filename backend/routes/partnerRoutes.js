@@ -160,9 +160,9 @@ router.delete('/:id', asyncHandler(async (req, res) => {
 // @desc    Auth partner & get token (Login)
 // @access  Public
 router.post('/login', asyncHandler(async (req, res) => {
-  const { businessId, password } = req.body;
+  const { email, businessId, password } = req.body;
 
-  const partner = await Partner.findOne({ businessId });
+  const partner = await Partner.findOne({ businessId, email });
 
   if (partner && (await partner.matchPassword(password))) {
     res.json({
@@ -176,7 +176,7 @@ router.post('/login', asyncHandler(async (req, res) => {
     });
   } else {
     res.status(401);
-    throw new Error('Invalid Business ID or Password');
+    throw new Error('Invalid Email, Business ID or Password');
   }
 }));
 

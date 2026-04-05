@@ -27,7 +27,6 @@ const extractData = (filePath, variableName) => {
 // @route   POST /api/seed
 // @access  Private (Developer) - simpler access for now as per request
 const seedDatabase = asyncHandler(async (req, res) => {
-  try {
     // 1. Load Data Paths
     const graphicDesignPath = path.join(__dirname, '../../frontend/src/assets/data/graphicDesignData.js');
     const servicesPath = path.join(__dirname, '../../frontend/src/assets/data/servicesData.js');
@@ -51,7 +50,9 @@ const seedDatabase = asyncHandler(async (req, res) => {
          title: service.title,
          description: service.description,
          iconName: service.iconName,
-         color: service.color
+         color: service.color,
+         path: service.path,
+         tags: service.tags
       }));
       await Service.insertMany(services);
     }
@@ -114,11 +115,6 @@ const seedDatabase = asyncHandler(async (req, res) => {
         partnerCreated: partner.name
       }
     });
-
-  } catch (error) {
-    res.status(500);
-    throw new Error(`Seeding failed: ${error.message}`);
-  }
 });
 
 module.exports = { seedDatabase };

@@ -9,8 +9,7 @@ const domains = [
     icon: <Palette size={28} />,
     description: 'Design Your Logos and Create Branding, Social Media Posts, and Banners for Your Business.',
     tags: ['Branding', 'UI/UX', 'Social Media'],
-    color: '#ec4899', // Pink
-    path: '/graphic-design'
+    color: '#ec4899' // Pink
   },
   {
     title: 'FrontEnd Development',
@@ -171,7 +170,7 @@ const Domains = () => {
       <div className="container">
         <div className="section-header centered-header-text">
           <h2 className="section-title">
-            OUR <span className="text-gradient">PROFESSIONAL SERVICES</span>
+            Get <span className="text-gradient">Your Professional Products</span>
           </h2>
         </div>
 
