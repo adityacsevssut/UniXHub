@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useToast } from '../context/ToastContext';
 import './Navbar.css';
 
-const Navbar = () => {
+const Navbar = ({ minimal = false }) => {
   const navigate = useNavigate();
   const { showToast } = useToast();
 
@@ -49,38 +49,60 @@ const Navbar = () => {
           <span>UniX<span className="text-highlight">Hub</span></span>
         </div>
 
-        <div className={`nav-links ${isOpen ? 'active' : ''}`}>
-          <a onClick={() => navigate('/')}>Home</a>
-          <a onClick={() => navigate('/domains')}>Get Services</a>
-          <a onClick={() => navigate('/features')}>Features</a>
-          <a onClick={() => navigate('/about')}>About</a>
+        {!minimal && (
+          <div className={`nav-links ${isOpen ? 'active' : ''}`}>
+            <a onClick={() => navigate('/')}>Home</a>
+            <a onClick={() => navigate('/domains')}>Get Services</a>
+            <a onClick={() => navigate('/features')}>Features</a>
+            <a onClick={() => navigate('/about')}>About</a>
 
-          <div className="mobile-auth-links">
-            {user ? (
-              <>
-                <div className="mobile-profile-info">
-                  <div className="mobile-user-avatar">{user.name?.charAt(0).toUpperCase()}</div>
-                  <span>{user.name}</span>
-                </div>
-                <a onClick={handleLogout} className="mobile-logout">Logout</a>
-              </>
-            ) : (
-              <a onClick={() => navigate('/login')} className="mobile-login-btn">Login / Sign Up</a>
-            )}
+            <div className="mobile-auth-links">
+              {user ? (
+                <>
+                  <div className="mobile-profile-info">
+                    <div className="mobile-user-avatar">
+                      {user.name?.charAt(0).toUpperCase()}
+                      {(user.role === 'developer' || user.isAdmin || user.email === 'nahakaditya344@gmail.com') && (
+                        <span className="admin-badge mobile" style={{ background: (user.email === 'nahakaditya344@gmail.com' || user.role === 'developer') ? 'linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%)' : 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)' }}>
+                          {user.email === 'nahakaditya344@gmail.com' ? 'Dev' : 'Admin'}
+                        </span>
+                      )}
+                      {user.role === 'partner' && (
+                        <span className="partner-badge mobile">Partner</span>
+                      )}
+                    </div>
+                    <span>{user.name}</span>
+                  </div>
+                  <a onClick={handleLogout} className="mobile-logout">Logout</a>
+                </>
+              ) : (
+                <a onClick={() => navigate('/login')} className="mobile-login-btn">Login / Sign Up</a>
+              )}
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="nav-right-group">
-          <div className="search-bar-container">
-            <input placeholder="Search services..." />
-            <Search size={18} />
-          </div>
+          {!minimal && (
+            <div className="search-bar-container">
+              <input placeholder="Search services..." />
+              <Search size={18} />
+            </div>
+          )}
 
           <div className="nav-actions">
             {user ? (
               <div className="user-profile-container" ref={profileRef}>
                 <div className="user-profile-icon" onClick={() => setProfileOpen(!profileOpen)}>
                   {user.name?.charAt(0).toUpperCase() || 'U'}
+                  {(user.role === 'developer' || user.isAdmin || user.email === 'nahakaditya344@gmail.com') && (
+                    <span className="admin-badge" style={{ background: (user.email === 'nahakaditya344@gmail.com' || user.role === 'developer') ? 'linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%)' : 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)' }}>
+                      {user.email === 'nahakaditya344@gmail.com' ? 'Dev' : 'Admin'}
+                    </span>
+                  )}
+                  {user.role === 'partner' && (
+                    <span className="partner-badge">Partner</span>
+                  )}
                 </div>
 
                 {profileOpen && (
@@ -90,6 +112,13 @@ const Navbar = () => {
                       <span className="dropdown-email">{user.email}</span>
                     </div>
                     <div className="dropdown-divider"></div>
+                    {(user.role === 'developer' || user.isAdmin || user.email === 'nahakaditya344@gmail.com') && (
+                      <button className="dropdown-item" onClick={() => { navigate('/admin/dashboard'); setProfileOpen(false); }}>
+                        <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <Rocket size={16} /> Admin Panel
+                        </span>
+                      </button>
+                    )}
                     <button className="dropdown-item" onClick={handleLogout}>
                       <LogOut size={16} /> Logout
                     </button>
@@ -100,9 +129,11 @@ const Navbar = () => {
               <button className="btn-secondary" onClick={() => navigate('/login')}>Login</button>
             )}
 
-            <div className="menu-icon" onClick={() => setIsOpen(!isOpen)}>
-              {isOpen ? <X /> : <Menu />}
-            </div>
+            {!minimal && (
+              <div className="menu-icon" onClick={() => setIsOpen(!isOpen)}>
+                {isOpen ? <X /> : <Menu />}
+              </div>
+            )}
           </div>
         </div>
       </div>

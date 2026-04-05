@@ -5,7 +5,7 @@ export const services = [
     description: "Design Your Logos and Create Branding, Social Media Posts, and Banners for Your Business.",
     tags: ["Branding", "UI/UX", "Social Media"],
     color: "#ec4899",
-    path: "/graphic-design"
+    path: "/graphic-design-hub"
   },
   {
     title: "FrontEnd Development",

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Users, Plus, Trash2, X, ArrowLeft, UploadCloud, Edit, Eye, EyeOff } from 'lucide-react';
 import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
 import './DeveloperDashboard.css';
 import './PartnerManagement.css';
 
@@ -157,7 +158,7 @@ const PartnerManagement = () => {
 
   return (
     <div className="dev-dashboard">
-      <Navbar />
+      <Navbar minimal={true} />
       <div className="dashboard-container">
         <header className="dashboard-header">
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -349,11 +350,8 @@ const PartnerManagement = () => {
             </div>
           ))}
         </div>
-
-        <footer className="dashboard-footer">
-          &copy; {new Date().getFullYear()} UniXHub Developer Console. All rights reserved.
-        </footer>
       </div>
+      <Footer />
     </div>
   );
 };

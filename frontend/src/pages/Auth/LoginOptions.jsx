@@ -100,49 +100,6 @@ const LoginOptions = () => {
 
           </div>
 
-
-          {/* Developer Login Option */}
-          <div
-            className="option-card"
-            onClick={() => navigate('/developer-login')}
-            style={{
-              border: '1px solid var(--border-color)',
-              borderRadius: '20px',
-              padding: '2.5rem 1.5rem',
-              cursor: 'pointer',
-              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              textAlign: 'center',
-              background: 'rgba(255,255,255,0.6)',
-              backdropFilter: 'blur(10px)'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = '#0ea5e9'; // Sky blue for devs
-              e.currentTarget.style.transform = 'translateY(-8px)';
-              e.currentTarget.style.boxShadow = '0 20px 40px -10px rgba(14, 165, 233, 0.2)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = 'var(--border-color)';
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = 'none';
-            }}
-          >
-            <div className="icon-wrapper" style={{
-              marginBottom: '1.5rem',
-              width: '80px',
-              height: '80px',
-              color: '#0ea5e9',
-              background: 'rgba(14, 165, 233, 0.1)',
-              borderColor: 'rgba(14, 165, 233, 0.2)'
-            }}>
-              <Terminal size={36} />
-            </div>
-            <h3 style={{ fontSize: '1.4rem', fontWeight: '700', marginBottom: '0.8rem', color: 'var(--text-main)' }}>Developer Login</h3>
-
-          </div>
-
         </div>
       </div>
     </div>

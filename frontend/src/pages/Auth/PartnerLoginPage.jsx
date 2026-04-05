@@ -6,7 +6,7 @@ import LoadingOverlay from '../../components/LoadingOverlay';
 import './Auth.css';
 
 const PartnerLoginPage = () => {
-  const [formData, setFormData] = useState({ businessId: '', password: '' });
+  const [formData, setFormData] = useState({ email: '', businessId: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -27,6 +27,7 @@ const PartnerLoginPage = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          email: formData.email,
           businessId: formData.businessId,
           password: formData.password
         })
@@ -40,7 +41,7 @@ const PartnerLoginPage = () => {
         localStorage.setItem('user', JSON.stringify(userToStore));
         navigate('/partner/dashboard');
       } else {
-        setError(data.message || 'Invalid Business ID or Password');
+        setError(data.message || 'Invalid Email, Business ID or Password');
       }
 
     } catch (err) {
@@ -73,6 +74,22 @@ const PartnerLoginPage = () => {
         )}
 
         <form className="auth-form" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label>Email Address</label>
+            <div className="input-wrapper">
+              <input
+                type="email"
+                name="email"
+                className="auth-input"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                placeholder="partner@example.com"
+              />
+              <Mail className="input-icon" size={20} />
+            </div>
+          </div>
+
           <div className="form-group">
             <label>Business ID</label>
             <div className="input-wrapper">

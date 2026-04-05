@@ -23,7 +23,7 @@ const PartnerDashboard = () => {
 
   return (
     <div className="partner-dashboard">
-      <Navbar />
+      <Navbar minimal={true} />
       <div className="dashboard-container">
 
         {/* Header Section */}
@@ -45,31 +45,6 @@ const PartnerDashboard = () => {
 
         {/* Dashboard Actions Grid */}
         <div className="dashboard-grid">
-
-          {/* Main Service Management Card */}
-          {isGraphicDesigner && (
-            <div className="dash-card primary-card" onClick={() => navigate('/partner/graphic-design')}>
-              <div className="card-icon-bg">
-                <Palette size={40} />
-              </div>
-              <div className="card-content" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-                <h3>Manage Design Catalog</h3>
-                <p>Add or update your services, quick actions, and pricing options.</p>
-                <span className="card-link">Enter Panel Section</span>
-              </div>
-            </div>
-          )}
-
-          {/* View Live Site Card */}
-          <div className="dash-card" onClick={() => navigate('/graphic-design')}>
-            <div className="card-icon-bg secondary">
-              <ExternalLink size={32} />
-            </div>
-            <div className="card-content">
-              <h3>View Live Page</h3>
-              <p>See how your services appear to customers on the main website.</p>
-            </div>
-          </div>
 
           {/* Your Dashboard (Coming Soon) */}
           <div className="dash-card">
