@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Palette, LogOut, Layout, ExternalLink, Settings, UserCircle, Briefcase } from 'lucide-react';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
+import GDPartnerDashboard from './GDPartnerDashboard';
 import './PartnerDashboard.css';
 
 const PartnerDashboard = () => {
@@ -20,6 +21,10 @@ const PartnerDashboard = () => {
   };
 
   const isGraphicDesigner = user.serviceId === 'Graphic Design' || user.businessId?.startsWith('GD_PARTNER');
+
+  if (isGraphicDesigner) {
+    return <GDPartnerDashboard user={user} onLogout={handleLogout} />;
+  }
 
   return (
     <div className="partner-dashboard">
