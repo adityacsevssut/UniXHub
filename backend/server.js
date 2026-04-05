@@ -49,6 +49,7 @@ app.use('/api/upload',         require('./routes/uploadRoutes'));
 app.use('/api/auth',           require('./routes/authRoutes'));
 app.use('/api/services',       require('./routes/serviceRoutes'));
 app.use('/api/partners',       require('./routes/partnerRoutes'));
+app.use('/api/gd-products',    require('./routes/gdProductRoutes'));
 
 app.use(errorHandler);
 

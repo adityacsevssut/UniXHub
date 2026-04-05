@@ -23,130 +23,12 @@ const categories = [
   { id: 'docs',       label: 'Docs',                icon: <FileText size={16} /> },
 ];
 
-const storeSections = [
-  {
-    title: 'Business Banners',
-    id: 'banner',
-    emoji: '🖼️',
-    items: Array.from({ length: 6 }).map((_, i) => ({
-      id: `banner-${i}`,
-      title: `Professional Business Banner ${i + 1}`,
-      price: Math.floor(Math.random() * 500 + 499),
-      badge: i === 0 ? 'Best Seller' : i === 1 ? 'New' : null,
-      rating: (4 + Math.random()).toFixed(1),
-      image: `https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=600&h=338&sig=${i}`,
-    })),
-  },
-  {
-    title: 'Creative Posters',
-    id: 'posters',
-    emoji: '🎨',
-    items: Array.from({ length: 6 }).map((_, i) => ({
-      id: `poster-${i}`,
-      title: `Creative Modern Poster ${i + 1}`,
-      price: Math.floor(Math.random() * 300 + 199),
-      badge: i === 2 ? 'Popular' : null,
-      rating: (4 + Math.random()).toFixed(1),
-      image: `https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=600&h=338&sig=${i}`,
-    })),
-  },
-  {
-    title: 'YouTube Banners',
-    id: 'yt-banner',
-    emoji: '▶️',
-    items: Array.from({ length: 6 }).map((_, i) => ({
-      id: `yt-banner-${i}`,
-      title: `Gaming / Tech YouTube Banner ${i + 1}`,
-      price: Math.floor(Math.random() * 400 + 299),
-      badge: i === 0 ? 'Trending' : null,
-      rating: (4 + Math.random()).toFixed(1),
-      image: `https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&q=80&w=600&h=338&sig=${i}`,
-    })),
-  },
-  {
-    title: 'Festival Banners',
-    id: 'festival',
-    emoji: '🎉',
-    items: Array.from({ length: 6 }).map((_, i) => ({
-      id: `festival-${i}`,
-      title: `Festive Celebration Design ${i + 1}`,
-      price: Math.floor(Math.random() * 200 + 99),
-      badge: null,
-      rating: (4 + Math.random()).toFixed(1),
-      image: `https://images.unsplash.com/photo-1582230237748-0b5c17fae446?auto=format&fit=crop&q=80&w=600&h=338&sig=${i}`,
-    })),
-  },
-  {
-    title: 'Tournament Posters',
-    id: 'tournament',
-    emoji: '🏆',
-    items: Array.from({ length: 6 }).map((_, i) => ({
-      id: `tourney-${i}`,
-      title: `Esports BGMI / Valorant Poster ${i + 1}`,
-      price: Math.floor(Math.random() * 600 + 399),
-      badge: i === 1 ? 'Hot' : null,
-      rating: (4 + Math.random()).toFixed(1),
-      image: `https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=600&h=338&sig=${i}`,
-    })),
-  },
-  {
-    title: 'Event Posters',
-    id: 'event',
-    emoji: '📅',
-    items: Array.from({ length: 6 }).map((_, i) => ({
-      id: `event-${i}`,
-      title: `Music Festival / Tech Meetup ${i + 1}`,
-      price: Math.floor(Math.random() * 500 + 299),
-      badge: null,
-      rating: (4 + Math.random()).toFixed(1),
-      image: `https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=600&h=338&sig=${i}`,
-    })),
-  },
-  {
-    title: 'Sheets',
-    id: 'sheets',
-    emoji: '📊',
-    items: Array.from({ length: 6 }).map((_, i) => ({
-      id: `sheet-${i}`,
-      title: [
-        'Monthly Budget Tracker Sheet',
-        'Student Attendance Register',
-        'Inventory Management Sheet',
-        'Project Timeline & Gantt Chart',
-        'Expense Report Template',
-        'Sales & Revenue Tracker',
-      ][i],
-      price: Math.floor(Math.random() * 150 + 49),
-      badge: i === 0 ? 'Best Seller' : i === 3 ? 'New' : null,
-      rating: (4 + Math.random()).toFixed(1),
-      image: `https://images.unsplash.com/photo-1543286386-713bdd548da4?auto=format&fit=crop&q=80&w=600&h=338&sig=${i}`,
-    })),
-  },
-  {
-    title: 'Docs',
-    id: 'docs',
-    emoji: '📄',
-    items: Array.from({ length: 6 }).map((_, i) => ({
-      id: `doc-${i}`,
-      title: [
-        'Professional Resume Template',
-        'Business Proposal Document',
-        'Project Report Template',
-        'Cover Letter Template',
-        'Meeting Minutes Template',
-        'SOP / Policy Document Template',
-      ][i],
-      price: Math.floor(Math.random() * 200 + 79),
-      badge: i === 0 ? 'Popular' : i === 1 ? 'Trending' : null,
-      rating: (4 + Math.random()).toFixed(1),
-      image: `https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&q=80&w=600&h=338&sig=${i}`,
-    })),
-  },
-];
+// Removing static storeSections data
 
 // ─── Store Card ───────────────────────────────────────────────────────────────
 const StoreCard = ({ item, onZoom }) => {
   const [imgError, setImgError] = useState(false);
+  const navigate = useNavigate();
 
   const badgeColor =
     item.badge === 'Best Seller' ? 'badge-pink' :
@@ -167,7 +49,7 @@ const StoreCard = ({ item, onZoom }) => {
           </div>
         ) : (
           <img
-            src={item.image}
+            src={item.image && item.image.startsWith('http') ? item.image : `http://localhost:5000${item.image}`}
             alt={item.title}
             className="gdh-card-img"
             loading="lazy"
@@ -196,11 +78,11 @@ const StoreCard = ({ item, onZoom }) => {
         </div>
 
         <div className="gdh-card-actions">
-          <button className="gdh-btn-details" onClick={() => onZoom(item)}>
+          <button className="gdh-btn-details" onClick={() => navigate(`/graphic-design-hub/${item._id || item.id}`, { state: { product: item } })}>
             <Eye size={15} /> Details
           </button>
           <button className="gdh-btn-buy">
-            <ShoppingCart size={15} /> Buy Now
+            <ShoppingCart size={15} /> Add to Cart
           </button>
         </div>
       </div>
@@ -215,16 +97,42 @@ const GraphicDesignHub = () => {
   const [searchQuery, setSearchQuery]       = useState('');
   const [activeTab, setActiveTab]           = useState('store');
   const [selectedImage, setSelectedImage]   = useState(null);
+  const [products, setProducts]             = useState([]);
 
-  const filteredSections = storeSections
-    .filter(s => activeCategory === 'all' || s.id === activeCategory)
-    .map(section => ({
-      ...section,
-      items: section.items.filter(item =>
-        item.title.toLowerCase().includes(searchQuery.toLowerCase())
-      ),
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    try {
+      const res = await fetch('http://localhost:5000/api/gd-products');
+      const data = await res.json();
+      setProducts(data);
+    } catch (err) {
+      console.error('Failed to fetch products', err);
+    }
+  };
+
+  const getEmojiForCategory = (catId) => {
+    const emojis = { banner: '🖼️', posters: '🎨', 'yt-banner': '▶️', festival: '🎉', tournament: '🏆', event: '📅', sheets: '📊', docs: '📄' };
+    return emojis[catId] || '✨';
+  };
+
+  const getTitleForCategory = (catId) => {
+    const cat = categories.find(c => c.id === catId);
+    return cat ? cat.label : 'Designs';
+  };
+
+  // Group products by category dynamically
+  const groupedProducts = categories
+    .filter(cat => cat.id !== 'all' && (activeCategory === 'all' || cat.id === activeCategory))
+    .map(cat => ({
+      id: cat.id,
+      title: getTitleForCategory(cat.id),
+      emoji: getEmojiForCategory(cat.id),
+      items: products.filter(p => p.category === cat.id && p.title.toLowerCase().includes(searchQuery.toLowerCase()))
     }))
-    .filter(s => s.items.length > 0);
+    .filter(section => section.items.length > 0);
 
   return (
     <div className="gdh-page">
@@ -306,8 +214,8 @@ const GraphicDesignHub = () => {
           </div>
 
           {/* Sections */}
-          {filteredSections.length > 0 ? (
-            filteredSections.map(section => (
+          {groupedProducts.length > 0 ? (
+            groupedProducts.map(section => (
               <div key={section.id} className="gdh-section" id={section.id}>
                 <div className="gdh-section-header">
                   <span className="gdh-section-emoji">{section.emoji}</span>
@@ -316,7 +224,7 @@ const GraphicDesignHub = () => {
                 </div>
                 <div className="gdh-grid">
                   {section.items.map(item => (
-                    <StoreCard key={item.id} item={item} onZoom={setSelectedImage} />
+                    <StoreCard key={item._id} item={item} onZoom={setSelectedImage} />
                   ))}
                 </div>
               </div>
@@ -377,7 +285,7 @@ const GraphicDesignHub = () => {
         <div className="gdh-zoom-modal" onClick={() => setSelectedImage(null)}>
           <div className="gdh-zoom-content" onClick={e => e.stopPropagation()}>
             <button className="gdh-zoom-close" onClick={() => setSelectedImage(null)}>✕</button>
-            <img src={selectedImage.image} alt={selectedImage.title} className="gdh-zoom-img" />
+            <img src={selectedImage.image && selectedImage.image.startsWith('http') ? selectedImage.image : `http://localhost:5000${selectedImage.image}`} alt={selectedImage.title} className="gdh-zoom-img" />
             <div className="gdh-zoom-info">
               <h3>{selectedImage.title}</h3>
               <p>Zoomed view for better pictorial representation</p>

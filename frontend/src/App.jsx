@@ -15,6 +15,7 @@ import SignupPage from './pages/Auth/SignupPage';
 import ForgotPasswordPage from './pages/Auth/ForgotPasswordPage';
 import NotFoundPage from './pages/NotFoundPage';
 import GraphicDesignHub from './pages/GraphicDesignHub';
+import ProductDetails from './pages/ProductDetails';
 import DeveloperDashboard from './pages/Admin/DeveloperDashboard';
 import PartnerManagement from './pages/Admin/PartnerManagement';
 import PartnerDashboard from './pages/Admin/PartnerDashboard';
@@ -65,6 +66,7 @@ function App() {
               <Route path="/register" element={<SignupPage />} />
               <Route path="/forgot-password" element={<ForgotPasswordPage />} />
               <Route path="/graphic-design-hub" element={<GraphicDesignHub />} />
+              <Route path="/graphic-design-hub/:id" element={<ProductDetails />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </AuthRedirect>
